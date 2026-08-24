@@ -6,15 +6,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
   <url>
-    <loc>https://thesewingstudio.example/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thesewingstudio.example/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://thesewingstudio.example/es/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thesewingstudio.example/" />
+    <loc>https://thesewing-studio.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thesewing-studio.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://thesewing-studio.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thesewing-studio.com/" />
   </url>
   <url>
-    <loc>https://thesewingstudio.example/es/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thesewingstudio.example/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://thesewingstudio.example/es/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thesewingstudio.example/" />
+    <loc>https://thesewing-studio.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thesewing-studio.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://thesewing-studio.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thesewing-studio.com/" />
   </url>
 </urlset>

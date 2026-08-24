@@ -116,24 +116,45 @@ function Convert-Logo {
     }
 }
 
-# --- Service photographs -------------------------------------------------
-# One representative image per service, named after the section it belongs to.
-# The source folder "Bepsoke" is misspelled in Drive; that is intentional here.
+# --- Gallery photographs -------------------------------------------------
+# Every photograph in the four service folders becomes a numbered gallery
+# image. Carousels are built from these, so nothing is hand-picked here
+# except the ordering: the photo that used to represent each service leads
+# its gallery so the first slide is always a known-good shot.
+# The source folder "Bepsoke" is misspelled in Drive; that is intentional.
 
-$serviceSources = @(
-    @{ Folder = "Alterations";      File = "IMG_9368.HEIC";  Target = "alterations.webp" },
-    @{ Folder = "Sewing Workshops"; File = "IMG_7554.HEIC";  Target = "workshops.webp" },
-    @{ Folder = "Bepsoke";          File = "Bespoke 3.HEIC"; Target = "bespoke.webp" }
+$galleries = @(
+    @{ Folder = "Alterations";      Prefix = "alterations"; Lead = "IMG_9368.HEIC" },
+    @{ Folder = "Sewing Workshops"; Prefix = "workshops";   Lead = "IMG_7554.HEIC" },
+    @{ Folder = "Bepsoke";          Prefix = "bespoke";     Lead = "Bespoke 3.HEIC" },
+    @{ Folder = "Back ground Images"; Prefix = "bg";        Lead = "" }
 )
 
-Write-Host "Service photographs" -ForegroundColor Cyan
-foreach ($entry in $serviceSources) {
-    $source = Join-Path $SourceRoot (Join-Path $entry.Folder $entry.File)
-    if (-not (Test-Path -LiteralPath $source)) {
-        Write-Warning ("  missing source: {0}" -f $source)
+Write-Host "Gallery photographs" -ForegroundColor Cyan
+foreach ($gallery in $galleries) {
+    $folder = Join-Path $SourceRoot $gallery.Folder
+    if (-not (Test-Path -LiteralPath $folder)) {
+        Write-Warning ("  missing folder: {0}" -f $folder)
         continue
     }
-    Convert-Photo -Source $source -Target (Join-Path $imagesOut $entry.Target)
+
+    # Known-good lead photo first, then everything else alphabetically.
+    $photos = @(Get-ChildItem -LiteralPath $folder -File | Where-Object { $_.Extension -match '^\.(HEIC|heic|jpg|JPG|jpeg|png)$' })
+    $ordered = @()
+    if ($gallery.Lead) {
+        $lead = $photos | Where-Object { $_.Name -eq $gallery.Lead }
+        if ($lead) { $ordered += $lead }
+        $ordered += @($photos | Where-Object { $_.Name -ne $gallery.Lead } | Sort-Object Name)
+    } else {
+        $ordered = @($photos | Sort-Object Name)
+    }
+
+    $index = 1
+    foreach ($photo in $ordered) {
+        $target = Join-Path $imagesOut ("{0}-{1}.webp" -f $gallery.Prefix, $index)
+        Convert-Photo -Source $photo.FullName -Target $target
+        $index++
+    }
 }
 
 # --- Logos ---------------------------------------------------------------

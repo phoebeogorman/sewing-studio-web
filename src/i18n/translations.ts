@@ -28,6 +28,7 @@ export interface Translations {
   // Hero
   hero_kicker: string;
   hero_title: string;
+  hero_tagline: string;
   hero_intro: string;
   hero_cta_primary: string;
   hero_cta_secondary: string;
@@ -73,46 +74,15 @@ export interface Translations {
 /**
  * Contact details.
  *
- * TODO: replace with the real details before launch.
- *
- * These are deliberately fake. The `.example` TLD is reserved by RFC 2606 and
- * can never resolve, so a message sent to one of these addresses cannot be
- * silently lost. They are locale independent, which is why they live outside
- * the translations object.
+ * The email address and the Instagram account are shared with the Phoebe
+ * O'Gorman brand site, which is run by the same maker. Locale independent,
+ * hence outside the translations object.
  */
 export const contact = {
-  email: "hello@thesewingstudio.example",
-  phone: "+44 0000 000000",
-  phoneHref: "tel:+440000000000",
+  email: "info@phoebeogorman.co.uk",
+  instagram: "https://www.instagram.com/phoebeogorman/",
+  instagramHandle: "@phoebeogorman",
   address: "Ribble Valley, Lancashire, UK",
-  instagram: "#",
-  instagramHandle: "@thesewingstudio",
-} as const;
-
-/**
- * Placeholder body copy.
- *
- * TODO: replace with the real copy before launch.
- *
- * Lorem Ipsum is used on purpose: it is unmistakably not real text, so the
- * template cannot be published by accident with invented content that reads
- * as if the studio had approved it.
- */
-const lorem = {
-  short:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt " +
-    "sapien nec lacus dignissim, at tempor odio pulvinar.",
-  medium:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut " +
-    "laoreet dictum, massa nisl tempor urna, vel dignissim quam ligula quis mi. " +
-    "Praesent hendrerit, sem in vulputate cursus, arcu massa vestibulum lorem, ac " +
-    "vehicula justo enim in dui.",
-  long:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vestibulum " +
-    "sapien at lorem faucibus, non tincidunt nisl efficitur. Integer feugiat, augue " +
-    "sit amet volutpat viverra, purus lorem posuere neque, eu bibendum arcu nulla " +
-    "vitae felis. Donec vel tortor a nibh cursus dignissim. Nam consequat, urna eget " +
-    "sollicitudin porta, dui augue vulputate mi, at lacinia justo velit nec risus.",
 } as const;
 
 export const translations: Record<Locale, Translations> = {
@@ -129,30 +99,63 @@ export const translations: Record<Locale, Translations> = {
 
     hero_kicker: "Ribble Valley, Lancashire",
     hero_title: "The Sewing Studio",
-    hero_intro: lorem.medium,
+    // Recovered from the studio's previous Wix site, extended for the new site.
+    hero_tagline: "Slow luxury. Pure artistry.",
+    hero_intro:
+      "We champion making that outlasts trends: noble textiles, exacting " +
+      "hand-finishing and garments built to be kept. From our Ribble Valley " +
+      "studio we care for the clothes you already love, teach the craft " +
+      "behind them, and cut one-off pieces from scratch.",
     hero_cta_primary: "Get in touch",
     hero_cta_secondary: "Our services",
 
     services_kicker: "Services",
 
     alterations_title: "Alterations",
-    alterations_lead: lorem.short,
-    alterations_body: lorem.long,
+    alterations_lead: "New life for the clothes you already love.",
+    alterations_body:
+      "From a simple hem to a full reshape, alterations are the quiet heart " +
+      "of the studio. We take in, let out, shorten, repair and reinvent, " +
+      "tailoring each garment to the person who wears it rather than to a " +
+      "size label. Bring us the jacket that never quite sat right, the dress " +
+      "worth saving, the trousers worn thin at the cuff: every piece is " +
+      "measured, discussed and finished by hand.",
     alterations_image_alt: "",
 
     workshops_title: "Workshops",
-    workshops_lead: lorem.short,
-    workshops_body: lorem.long,
+    workshops_lead: "Small groups, real skills, unhurried teaching.",
+    workshops_body:
+      "Our workshops are hands-on sessions for beginners and improvers " +
+      "alike: threading a machine, mastering seams and hems, reading a " +
+      "pattern, altering your own clothes with confidence. Groups are kept " +
+      "deliberately small so everyone gets the bench space and the attention " +
+      "they need, and every session ends with something finished by your own " +
+      "hands. Machines and tools are provided; you bring the curiosity.",
     workshops_image_alt: "",
 
     bespoke_title: "Bespoke",
-    bespoke_lead: lorem.short,
-    bespoke_body: lorem.long,
+    // Recovered from the studio's previous Wix site, extended for the new site.
+    bespoke_lead:
+      "A garment designed around one person, from first sketch to final fitting.",
+    bespoke_body:
+      "Our bespoke process is a collaborative dialogue between form and " +
+      "fabric, executed with precision and a deep respect for sewing. Each " +
+      "commission begins with a conversation — how you live, how you move, " +
+      "what you want the piece to become — followed by measurements, toile " +
+      "fittings and patient hand-work until the garment belongs to you alone.",
     bespoke_image_alt: "",
 
     about_kicker: "About",
     about_title: "A studio built on craft",
-    about_body: lorem.long,
+    // Recovered from the studio's previous Wix site, extended for the new site.
+    about_body:
+      "We believe in the quiet power of the slow fashion movement. Within " +
+      "our studio, each garment serves as an enduring testament to " +
+      "meticulous making. Our philosophy is rooted in a timeless pursuit of " +
+      "perfection, where every stitch is a deliberate creative act. Whether " +
+      "we are reshaping a treasured coat, guiding someone through their " +
+      "first seam or cutting a pattern from scratch, the standard never " +
+      "changes: take the time the work needs, and let it speak.",
     about_image_alt: "",
 
     footer_tagline: "Alterations, workshops and bespoke making.",
@@ -177,30 +180,64 @@ export const translations: Record<Locale, Translations> = {
 
     hero_kicker: "Ribble Valley, Lancashire",
     hero_title: "The Sewing Studio",
-    hero_intro: lorem.medium,
+    // Recuperado de la anterior web del estudio en Wix, ampliado para la nueva.
+    hero_tagline: "Lujo pausado. Arte puro.",
+    hero_intro:
+      "Defendemos lo que se hace para durar: tejidos nobles, acabados a mano " +
+      "exactos y prendas pensadas para conservarse. Desde nuestro estudio en " +
+      "Ribble Valley cuidamos la ropa que ya quieres, enseñamos el oficio " +
+      "que hay detrás y cortamos piezas únicas desde cero.",
     hero_cta_primary: "Contactar",
     hero_cta_secondary: "Nuestros servicios",
 
     services_kicker: "Servicios",
 
     alterations_title: "Arreglos",
-    alterations_lead: lorem.short,
-    alterations_body: lorem.long,
+    alterations_lead: "Nueva vida para la ropa que ya quieres.",
+    alterations_body:
+      "De un bajo sencillo a una remodelación completa, los arreglos son el " +
+      "corazón sereno del estudio. Entallamos, ampliamos, acortamos, " +
+      "reparamos y reinventamos, adaptando cada prenda a quien la lleva y no " +
+      "a una etiqueta de talla. Traenos la chaqueta que nunca sentó del todo " +
+      "bien, el vestido que merece salvarse, los pantalones desgastados en " +
+      "el dobladillo: cada pieza se mide, se comenta y se termina a mano.",
     alterations_image_alt: "",
 
     workshops_title: "Talleres",
-    workshops_lead: lorem.short,
-    workshops_body: lorem.long,
+    workshops_lead: "Grupos reducidos, oficio real, enseñanza sin prisa.",
+    workshops_body:
+      "Nuestros talleres son sesiones prácticas tanto para quienes empiezan " +
+      "como para quienes quieren mejorar: enhebrar la máquina, dominar " +
+      "costuras y bajos, leer un patrón, arreglar tu propia ropa con " +
+      "confianza. Los grupos se mantienen pequeños a propósito, para que " +
+      "cada persona tenga su espacio y su atención, y cada sesión termina " +
+      "con algo hecho por tus propias manos. Máquinas y herramientas van de " +
+      "nuestra parte; la curiosidad, de la tuya.",
     workshops_image_alt: "",
 
     bespoke_title: "A medida",
-    bespoke_lead: lorem.short,
-    bespoke_body: lorem.long,
+    // Recuperado de la anterior web del estudio en Wix, ampliado para la nueva.
+    bespoke_lead:
+      "Una prenda diseñada para una sola persona, del primer boceto al último probador.",
+    bespoke_body:
+      "Nuestro proceso a medida es un diálogo entre forma y tejido, " +
+      "ejecutado con precisión y un profundo respeto por la costura. Cada " +
+      "encargo empieza con una conversación: cómo vives, cómo te mueves, qué " +
+      "quieres que llegue a ser esa pieza; siguen las medidas, las pruebas " +
+      "de patronaje y un trabajo paciente a mano hasta que la prenda es solo tuya.",
     bespoke_image_alt: "",
 
     about_kicker: "Sobre nosotras",
     about_title: "Un estudio hecho de oficio",
-    about_body: lorem.long,
+    // Recuperado de la anterior web del estudio en Wix, ampliado para la nueva.
+    about_body:
+      "Creemos en la fuerza serena de la moda lenta. En nuestro estudio, " +
+      "cada prenda es un testimonio duradero del trabajo meticuloso. Nuestra " +
+      "filosofía parte de una búsqueda atemporal de la perfección, donde cada " +
+      "puntada es un acto creativo deliberado. Ya sea remodelar un abrigo " +
+      "querido, acompañar a alguien en su primera costura o trazar un patrón " +
+      "desde cero, el estándar nunca cambia: darle al trabajo el tiempo que " +
+      "pide y dejar que hable.",
     about_image_alt: "",
 
     footer_tagline: "Arreglos, talleres y confección a medida.",

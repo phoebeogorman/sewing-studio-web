@@ -1,6 +1,9 @@
 ---
 /**
  * Studio introduction, sitting between the services and the footer.
+ *
+ * A single photograph anchors the text; the section fills a viewport like the
+ * service sections above it.
  */
 import type { Locale } from "../i18n/translations";
 import { t } from "../i18n/translations";
@@ -11,23 +14,46 @@ interface Props {
 
 const { locale } = Astro.props;
 const strings = t(locale);
+
+// Candidates: /images/bg-1.webp through /images/bg-4.webp. The hero uses
+// bg-1, so the about section takes the next one.
+const aboutImage = "/images/bg-2.webp";
 ---
 
 <section id="about" class="about page-section" aria-labelledby="about-title">
   <div class="ss-container about-inner">
-    <p class="section-kicker">{strings.about_kicker}</p>
-    <h2 id="about-title" class="section-title about-title">{strings.about_title}</h2>
-    <p class="section-copy about-body">{strings.about_body}</p>
+    <div class="about-media">
+      <img src={aboutImage} alt="" width="1600" height="1600" loading="lazy" decoding="async" />
+    </div>
+
+    <div class="about-content">
+      <p class="section-kicker">{strings.about_kicker}</p>
+      <h2 id="about-title" class="section-title about-title">{strings.about_title}</h2>
+      <p class="section-copy about-body">{strings.about_body}</p>
+    </div>
   </div>
 </section>
 
 <style>
   .about-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    width: 100%;
+  }
+
+  .about-media img {
+    width: 100%;
+    height: clamp(380px, 62vh, 620px);
+    object-fit: cover;
+  }
+
+  .about-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 1.25rem;
-    text-align: center;
   }
 
   .about-title {
@@ -36,5 +62,23 @@ const strings = t(locale);
 
   .about-body {
     max-width: 58ch;
+  }
+
+  @media (max-width: 900px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+      align-content: start;
+      gap: 1.75rem;
+    }
+
+    /* Image first on a phone so the section does not open with a wall of
+       text after three service blocks. */
+    .about-content {
+      order: 1;
+    }
+
+    .about-media img {
+      height: clamp(300px, 48vh, 460px);
+    }
   }
 </style>

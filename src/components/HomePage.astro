@@ -21,6 +21,8 @@ interface Props {
 const { locale } = Astro.props;
 const strings = t(locale);
 
+// Gallery order mirrors scripts/convert-assets.ps1: the lead photo of each
+// service is its known-good shot, the rest follow Drive's alphabetical order.
 const services = [
   {
     id: "alterations",
@@ -28,7 +30,7 @@ const services = [
     lead: strings.alterations_lead,
     body: strings.alterations_body,
     imageAlt: strings.alterations_image_alt,
-    image: "/images/alterations.webp",
+    gallery: [1, 2, 3, 4, 5].map((n) => `/images/alterations-${n}.webp`),
   },
   {
     id: "workshops",
@@ -36,7 +38,7 @@ const services = [
     lead: strings.workshops_lead,
     body: strings.workshops_body,
     imageAlt: strings.workshops_image_alt,
-    image: "/images/workshops.webp",
+    gallery: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/images/workshops-${n}.webp`),
   },
   {
     id: "bespoke",
@@ -44,7 +46,7 @@ const services = [
     lead: strings.bespoke_lead,
     body: strings.bespoke_body,
     imageAlt: strings.bespoke_image_alt,
-    image: "/images/bespoke.webp",
+    gallery: [1, 2, 3, 4].map((n) => `/images/bespoke-${n}.webp`),
   },
 ];
 ---
@@ -61,7 +63,7 @@ const services = [
           title={service.title}
           lead={service.lead}
           body={service.body}
-          image={service.image}
+          gallery={service.gallery}
           imageAlt={service.imageAlt}
           index={i + 1}
           reversed={i % 2 === 1}

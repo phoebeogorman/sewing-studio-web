@@ -1,9 +1,4 @@
-# TODO: remove the blanket Disallow before launch, together with the noindex
-# meta tag in src/layouts/Layout.astro.
-#
-# The site is still a template filled with Lorem Ipsum. Letting search engines
-# index placeholder copy is difficult to undo.
 User-agent: *
-Disallow: /
+Allow: /
 
-Sitemap: https://thesewingstudio.example/sitemap.xml
+Sitemap: https://thesewing-studio.com/sitemap.xml

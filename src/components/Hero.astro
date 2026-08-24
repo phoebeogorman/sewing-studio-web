@@ -1,7 +1,9 @@
 ---
 /**
- * Opening section: the studio name set in the display face, a short intro and
- * the two calls to action.
+ * Opening section, filling the first viewport.
+ *
+ * A full-bleed photograph sits behind the display type. The gradient keeps
+ * the black type readable without hiding the image entirely.
  */
 import type { Locale } from "../i18n/translations";
 import { contact, t } from "../i18n/translations";
@@ -12,12 +14,28 @@ interface Props {
 
 const { locale } = Astro.props;
 const strings = t(locale);
+
+// Swap the number to change the opening shot; the candidates are
+// /images/bg-1.webp through /images/bg-4.webp.
+const heroImage = "/images/bg-1.webp";
 ---
 
 <section class="hero" aria-labelledby="hero-title">
+  <img
+    src={heroImage}
+    alt=""
+    class="hero-photo"
+    width="1600"
+    height="1600"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="hero-veil" aria-hidden="true"></div>
+
   <div class="ss-container hero-inner">
     <p class="section-kicker">{strings.hero_kicker}</p>
     <h1 id="hero-title" class="display-title hero-title">{strings.hero_title}</h1>
+    <p class="hero-tagline">{strings.hero_tagline}</p>
     <p class="section-copy hero-intro">{strings.hero_intro}</p>
 
     <div class="hero-actions">
@@ -29,39 +47,74 @@ const strings = t(locale);
       </a>
     </div>
   </div>
-
-  <div class="hero-rule" aria-hidden="true"></div>
 </section>
 
 <style>
+  /* One full viewport under the sticky navbar: the scroll container already
+     carries scroll-padding-top for anchors, so no extra offset here. */
   .hero {
-    padding-block: clamp(64px, 11vw, 152px) clamp(48px, 7vw, 96px);
+    position: relative;
+    min-height: calc(100svh - var(--navbar-height));
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Cream wash fading towards the text side: enough contrast for black type
+     while leaving the photograph visible on the right. Built with color-mix
+     over the page token so no colour is hardcoded here. */
+  .hero-veil {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--color-white-cream) 94%, transparent) 0%,
+      color-mix(in srgb, var(--color-white-cream) 82%, transparent) 42%,
+      color-mix(in srgb, var(--color-white-cream) 35%, transparent) 100%
+    );
   }
 
   .hero-inner {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    padding-block: clamp(48px, 8vw, 96px);
   }
 
   .hero-title {
     max-width: 14ch;
   }
 
+  /* The recovered Wix line sits between title and intro as its own voice:
+     display face, but smaller than the h1 and with generous tracking. */
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.1em;
+    letter-spacing: 0.04em;
+    color: var(--color-orange);
+  }
+
   .hero-intro {
-    max-width: 54ch;
+    max-width: 52ch;
   }
 
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.875rem;
-    margin-top: 0.75rem;
-  }
-
-  .hero-rule {
-    margin-top: clamp(48px, 7vw, 96px);
-    border-bottom: 1px solid var(--border);
+    margin-top: 0.5rem;
   }
 </style>

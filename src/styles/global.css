@@ -228,6 +228,15 @@ p {
 }
 
 .page-section {
+  /* Every main section fills the first viewport below the sticky navbar, so
+     the page reads as a sequence of full-height panels. Sections with more
+     content simply grow taller. The column direction lets the inner
+     .ss-container keep its own horizontal centering while the section
+     centers it vertically. */
+  min-height: calc(100svh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-block: var(--section-padding);
 }
 

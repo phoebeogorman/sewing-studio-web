@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 // TODO: replace with the real domain once it is decided. Canonical URLs, the
 // hreflang alternates and the Open Graph tags are all derived from this value.
 export default defineConfig({
-  site: 'https://thesewingstudio.example',
+  site: 'https://thesewing-studio.com',
   vite: {
     plugins: [tailwindcss()]
   }

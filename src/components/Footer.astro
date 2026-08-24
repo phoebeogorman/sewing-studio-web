@@ -2,7 +2,8 @@
 /**
  * Footer. Also acts as the contact section, since the site is a single page.
  *
- * The contact details are placeholders. See `contact` in translations.ts.
+ * The email address and Instagram account are the real, shared brand
+ * contacts; see `contact` in translations.ts.
  */
 import type { Locale } from "../i18n/translations";
 import { contact, t } from "../i18n/translations";
@@ -28,7 +29,6 @@ const year = new Date().getFullYear();
         <h3 class="footer-heading">{strings.footer_contact_heading}</h3>
         <ul class="footer-list">
           <li><a href={`mailto:${contact.email}`} class="footer-link">{contact.email}</a></li>
-          <li><a href={contact.phoneHref} class="footer-link">{contact.phone}</a></li>
           <li><span class="footer-muted">{contact.address}</span></li>
         </ul>
       </div>
