@@ -1,0 +1,143 @@
+---
+/**
+ * Footer. Also acts as the contact section, since the site is a single page.
+ *
+ * The contact details are placeholders. See `contact` in translations.ts.
+ */
+import type { Locale } from "../i18n/translations";
+import { contact, t } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+const year = new Date().getFullYear();
+---
+
+<footer id="contact" class="footer" aria-labelledby="footer-title">
+  <div class="ss-container footer-inner">
+    <div class="footer-brand">
+      <h2 id="footer-title" class="section-title footer-title">{strings.hero_title}</h2>
+      <p class="footer-tagline">{strings.footer_tagline}</p>
+    </div>
+
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h3 class="footer-heading">{strings.footer_contact_heading}</h3>
+        <ul class="footer-list">
+          <li><a href={`mailto:${contact.email}`} class="footer-link">{contact.email}</a></li>
+          <li><a href={contact.phoneHref} class="footer-link">{contact.phone}</a></li>
+          <li><span class="footer-muted">{contact.address}</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3 class="footer-heading">{strings.footer_follow_heading}</h3>
+        <ul class="footer-list">
+          <li>
+            <a
+              href={contact.instagram}
+              class="footer-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {contact.instagramHandle}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="ss-container footer-bottom">
+    <p class="footer-muted">
+      &copy; {year} The Sewing Studio. {strings.footer_rights}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--surface);
+    padding-top: var(--section-padding);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .footer-title {
+    max-width: 12ch;
+  }
+
+  .footer-tagline {
+    margin-top: 0.75rem;
+    color: var(--text-secondary);
+    max-width: 34ch;
+  }
+
+  .footer-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-heading {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .footer-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .footer-link {
+    font-size: 0.9375rem;
+    border-bottom: 1px solid transparent;
+    transition: color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .footer-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .footer-muted {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+  }
+
+  .footer-bottom {
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 860px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-columns {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

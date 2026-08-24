@@ -1,0 +1,167 @@
+---
+/**
+ * The only layout. It owns the document head: metadata, SEO, Open Graph,
+ * JSON-LD, font preloads and the locale persistence script.
+ */
+import "../styles/global.css";
+import type { Locale } from "../i18n/translations";
+import { alternateLocale, localeHomePath, t } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+  /** Path of this page relative to the site root, e.g. "/" or "/es/". */
+  canonicalPath: string;
+  title?: string;
+  description?: string;
+}
+
+const { locale, canonicalPath, title, description } = Astro.props;
+const strings = t(locale);
+
+const pageTitle = title ?? strings.meta_title;
+const pageDescription = description ?? strings.meta_description;
+
+// Canonical URLs come from `Astro.site`, not from `Astro.url.origin`: the
+// latter reflects the origin actually serving the page, so every canonical
+// would point at localhost during development.
+const site = Astro.site ?? new URL("https://thesewingstudio.example");
+const canonicalUrl = new URL(canonicalPath, site).toString();
+const englishUrl = new URL("/", site).toString();
+const spanishUrl = new URL("/es/", site).toString();
+const ogImageUrl = new URL("/og-image.png", site).toString();
+
+const langAttr = locale === "es" ? "es" : "en";
+const ogLocale = locale === "es" ? "es_ES" : "en_GB";
+const altLocale = alternateLocale(locale);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.origin}/#organization`,
+      name: "The Sewing Studio",
+      url: site.origin,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.origin}/#website`,
+      url: site.origin,
+      name: "The Sewing Studio",
+      inLanguage: ["en", "es"],
+      publisher: { "@id": `${site.origin}/#organization` },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: pageTitle,
+      description: pageDescription,
+      inLanguage: langAttr,
+      isPartOf: { "@id": `${site.origin}/#website` },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={langAttr}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {/* TODO: remove before launch, together with the rules in public/robots.txt.
+        The site is a template filled with Lorem Ipsum and search engines
+        indexing placeholder copy is difficult to undo. */}
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="alternate" hreflang="en" href={englishUrl} />
+    <link rel="alternate" hreflang="es" href={spanishUrl} />
+    <link rel="alternate" hreflang="x-default" href={englishUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="The Sewing Studio" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={altLocale === "es" ? "es_ES" : "en_GB"} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <meta name="theme-color" content="#f4f1e9" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    {/* Only the latin subsets are preloaded. latin-ext is declared with a
+        unicode-range in global.css and fetched on demand. */}
+    <link
+      rel="preload"
+      href="/fonts/BodoniModa-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/InstrumentSans-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    {/* Runs before first paint so the redirect cannot flash the wrong language.
+        An explicit ?lang= always wins and is persisted, which is how the
+        language switcher survives this script running on the next page load. */}
+    <script is:inline>
+      (function () {
+        var KEY = "sewing-studio-locale";
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var requested = params.get("lang");
+
+          if (requested === "en" || requested === "es") {
+            localStorage.setItem(KEY, requested);
+            params.delete("lang");
+            var query = params.toString();
+            history.replaceState(
+              null,
+              "",
+              window.location.pathname + (query ? "?" + query : "") + window.location.hash
+            );
+            return;
+          }
+
+          var path = window.location.pathname;
+          if (path !== "/" && path !== "/index.html") return;
+
+          var stored = localStorage.getItem(KEY);
+          if (!stored) {
+            var languages = navigator.languages || [navigator.language || ""];
+            stored = /(^es\b)|(-ES\b)/i.test(languages.join(",")) ? "es" : "en";
+            localStorage.setItem(KEY, stored);
+          }
+          if (stored === "es") window.location.replace("/es/");
+        } catch (error) {
+          /* localStorage is unavailable in some private browsing modes. */
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">{strings.nav_skip_to_content}</a>
+    <slot />
+  </body>
+</html>

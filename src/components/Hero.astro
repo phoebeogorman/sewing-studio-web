@@ -1,0 +1,67 @@
+---
+/**
+ * Opening section: the studio name set in the display face, a short intro and
+ * the two calls to action.
+ */
+import type { Locale } from "../i18n/translations";
+import { contact, t } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="ss-container hero-inner">
+    <p class="section-kicker">{strings.hero_kicker}</p>
+    <h1 id="hero-title" class="display-title hero-title">{strings.hero_title}</h1>
+    <p class="section-copy hero-intro">{strings.hero_intro}</p>
+
+    <div class="hero-actions">
+      <a href={`mailto:${contact.email}`} class="btn btn-primary">
+        {strings.hero_cta_primary}
+      </a>
+      <a href="#alterations" class="btn btn-outline">
+        {strings.hero_cta_secondary}
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-rule" aria-hidden="true"></div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(64px, 11vw, 152px) clamp(48px, 7vw, 96px);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .hero-title {
+    max-width: 14ch;
+  }
+
+  .hero-intro {
+    max-width: 54ch;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-top: 0.75rem;
+  }
+
+  .hero-rule {
+    margin-top: clamp(48px, 7vw, 96px);
+    border-bottom: 1px solid var(--border);
+  }
+</style>

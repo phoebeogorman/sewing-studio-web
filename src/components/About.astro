@@ -1,0 +1,40 @@
+---
+/**
+ * Studio introduction, sitting between the services and the footer.
+ */
+import type { Locale } from "../i18n/translations";
+import { t } from "../i18n/translations";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+---
+
+<section id="about" class="about page-section" aria-labelledby="about-title">
+  <div class="ss-container about-inner">
+    <p class="section-kicker">{strings.about_kicker}</p>
+    <h2 id="about-title" class="section-title about-title">{strings.about_title}</h2>
+    <p class="section-copy about-body">{strings.about_body}</p>
+  </div>
+</section>
+
+<style>
+  .about-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+  }
+
+  .about-title {
+    max-width: 18ch;
+  }
+
+  .about-body {
+    max-width: 58ch;
+  }
+</style>

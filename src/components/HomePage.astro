@@ -1,0 +1,75 @@
+---
+/**
+ * The whole single page, composed once.
+ *
+ * The two route files under src/pages differ only in the locale they pass, so
+ * the composition itself lives here instead of being copied into both.
+ */
+import type { Locale } from "../i18n/translations";
+import { localeHomePath, t } from "../i18n/translations";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "./Navbar.astro";
+import Hero from "./Hero.astro";
+import ServiceSection from "./ServiceSection.astro";
+import About from "./About.astro";
+import Footer from "./Footer.astro";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+
+const services = [
+  {
+    id: "alterations",
+    title: strings.alterations_title,
+    lead: strings.alterations_lead,
+    body: strings.alterations_body,
+    imageAlt: strings.alterations_image_alt,
+    image: "/images/alterations.webp",
+  },
+  {
+    id: "workshops",
+    title: strings.workshops_title,
+    lead: strings.workshops_lead,
+    body: strings.workshops_body,
+    imageAlt: strings.workshops_image_alt,
+    image: "/images/workshops.webp",
+  },
+  {
+    id: "bespoke",
+    title: strings.bespoke_title,
+    lead: strings.bespoke_lead,
+    body: strings.bespoke_body,
+    imageAlt: strings.bespoke_image_alt,
+    image: "/images/bespoke.webp",
+  },
+];
+---
+
+<Layout locale={locale} canonicalPath={localeHomePath(locale)}>
+  <Navbar locale={locale} />
+  <main id="main-content">
+    <Hero locale={locale} />
+    {
+      services.map((service, i) => (
+        <ServiceSection
+          locale={locale}
+          id={service.id}
+          title={service.title}
+          lead={service.lead}
+          body={service.body}
+          image={service.image}
+          imageAlt={service.imageAlt}
+          index={i + 1}
+          reversed={i % 2 === 1}
+          surface={i % 2 === 1}
+        />
+      ))
+    }
+    <About locale={locale} />
+  </main>
+  <Footer locale={locale} />
+</Layout>
