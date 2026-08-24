@@ -80,8 +80,8 @@ export interface Translations {
  */
 export const contact = {
   email: "phoebe@thesewing-studio.com",
-  instagram: "https://www.instagram.com/the_sewing_studio__/",
-  instagramHandle: "@the_sewing_studio__",
+  instagram: "https://www.instagram.com/the_sewing_studio___/",
+  instagramHandle: "@the_sewing_studio___",
   address: "Ribble Valley, Lancashire, UK",
 } as const;
 
