@@ -74,14 +74,14 @@ export interface Translations {
 /**
  * Contact details.
  *
- * The email address and the Instagram account are shared with the Phoebe
- * O'Gorman brand site, which is run by the same maker. Locale independent,
- * hence outside the translations object.
+ * The studio has its own address and Instagram account, separate from the
+ * Phoebe O'Gorman brand site. Locale independent, hence outside the
+ * translations object.
  */
 export const contact = {
-  email: "info@phoebeogorman.co.uk",
-  instagram: "https://www.instagram.com/phoebeogorman/",
-  instagramHandle: "@phoebeogorman",
+  email: "phoebe@thesewing-studio.com",
+  instagram: "https://www.instagram.com/the_sewing_studio__/",
+  instagramHandle: "@the_sewing_studio__",
   address: "Ribble Valley, Lancashire, UK",
 } as const;
 
