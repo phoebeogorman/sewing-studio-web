@@ -7,6 +7,8 @@
  */
 import type { Block } from "../../content.config";
 import { contact } from "../../i18n/translations";
+import { Image } from "astro:assets";
+import { resolveContentImage } from "../../assets/images/index";
 
 type HeroBlockData = Extract<Block, { type: "hero" }>;
 
@@ -19,15 +21,16 @@ interface Props {
 const { block, isFirst = false } = Astro.props;
 const TitleTag = isFirst ? "h1" : "h2";
 const headingId = `${block.id}-title`;
+const heroImg = resolveContentImage(block.image.src);
 ---
 
 <section id={block.id} class="hero" aria-labelledby={headingId}>
-  <img
-    src={block.image.src}
+  <Image
+    src={heroImg}
     alt={block.image.alt}
     class="hero-photo"
-    width="1600"
-    height="1600"
+    widths={[800, 1200, 1600, 2000]}
+    sizes="100vw"
     loading="eager"
     fetchpriority="high"
   />

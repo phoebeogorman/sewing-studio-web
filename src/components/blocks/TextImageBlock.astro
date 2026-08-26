@@ -6,6 +6,8 @@
  * the background between the page colour and the cream surface.
  */
 import type { Block } from "../../content.config";
+import { Image } from "astro:assets";
+import { resolveContentImage } from "../../assets/images/index";
 
 type TextImageBlockData = Extract<Block, { type: "text-image" }>;
 
@@ -15,6 +17,7 @@ interface Props {
 
 const { block } = Astro.props;
 const headingId = `${block.id}-title`;
+const img = resolveContentImage(block.image.src);
 ---
 
 <section
@@ -29,13 +32,12 @@ const headingId = `${block.id}-title`;
     ]}
   >
     <div class="about-media">
-      <img
-        src={block.image.src}
+      <Image
+        src={img}
         alt={block.image.alt}
-        width="1600"
-        height="1600"
+        widths={[600, 900, 1200]}
+        sizes="(max-width: 900px) 100vw, 45vw"
         loading="lazy"
-        decoding="async"
       />
     </div>
 

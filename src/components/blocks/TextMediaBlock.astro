@@ -13,6 +13,8 @@
 import type { Block } from "../../content.config";
 import type { Locale } from "../../i18n/translations";
 import { t } from "../../i18n/translations";
+import { Image } from "astro:assets";
+import { resolveContentImage } from "../../assets/images/index";
 
 type TextMediaBlockData = Extract<Block, { type: "text-media" }>;
 
@@ -30,6 +32,11 @@ const indexLabel = index === undefined ? undefined : String(index).padStart(2, "
 
 const labelPrev = strings.carousel_previous.replace("{title}", block.title);
 const labelNext = strings.carousel_next.replace("{title}", block.title);
+
+const slides = block.gallery.map((image) => ({
+  meta: resolveContentImage(image.src),
+  alt: image.alt,
+}));
 ---
 
 <section
@@ -69,9 +76,15 @@ const labelNext = strings.carousel_next.replace("{title}", block.title);
         aria-label={block.title}
       >
         {
-          block.gallery.map((image) => (
+          slides.map((slide) => (
             <div class="carousel-slide">
-              <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+              <Image
+                src={slide.meta}
+                alt={slide.alt}
+                widths={[480, 720, 960, 1200]}
+                sizes="(max-width: 900px) 100vw, 50vw"
+                loading="lazy"
+              />
             </div>
           ))
         }
