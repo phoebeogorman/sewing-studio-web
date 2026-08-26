@@ -12,12 +12,17 @@
       "surface": "page"
     },
     {
-      "type": "text",
-      "id": "test1",
-      "kicker": "",
+      "type": "text-image",
+      "id": "aaaa1",
+      "kicker": "aaaa",
       "title": "aaa",
+      "image": {
+        "src": "/images/IconTTSbg.png",
+        "alt": ""
+      },
       "navLabel": "",
-      "body": "aaa",
+      "body": "aa",
+      "mediaSide": "end",
       "surface": "page"
     }
   ]
