@@ -1,0 +1,113 @@
+---
+/**
+ * Two columns with a single still image rather than a carousel.
+ *
+ * `mediaSide` decides which side the photograph sits on; `surface` alternates
+ * the background between the page colour and the cream surface.
+ */
+import type { Block } from "../../content.config";
+
+type TextImageBlockData = Extract<Block, { type: "text-image" }>;
+
+interface Props {
+  block: TextImageBlockData;
+}
+
+const { block } = Astro.props;
+const headingId = `${block.id}-title`;
+---
+
+<section
+  id={block.id}
+  class:list={["about page-section", { "about--surface": block.surface === "cream" }]}
+  aria-labelledby={headingId}
+>
+  <div
+    class:list={[
+      "ss-container about-inner",
+      { "about-inner--reversed": block.mediaSide === "end" },
+    ]}
+  >
+    <div class="about-media">
+      <img
+        src={block.image.src}
+        alt={block.image.alt}
+        width="1600"
+        height="1600"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="about-content">
+      <p class="section-kicker">{block.kicker}</p>
+      <h2 id={headingId} class="section-title about-title">{block.title}</h2>
+      <p class="section-copy about-body">{block.body}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about--surface {
+    background: var(--surface);
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    width: 100%;
+  }
+
+  /* Document order is media then copy, so media sits on the start side by
+     default. This class pushes it to the end. TextMediaBlock is the inverse:
+     its document order is copy then media, so it applies --reversed when
+     mediaSide is start. Both map start/end to the same visual sides. */
+  .about-inner--reversed .about-media {
+    order: 2;
+  }
+
+  .about-media img {
+    width: 100%;
+    height: clamp(380px, 62vh, 620px);
+    object-fit: cover;
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .about-title {
+    max-width: 18ch;
+  }
+
+  .about-body {
+    max-width: 58ch;
+  }
+
+  @media (max-width: 900px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+      align-content: start;
+      gap: 1.75rem;
+    }
+
+    /* Image first on a phone so the section does not open with a wall of
+       text after the blocks above it. */
+    .about-inner--reversed .about-media {
+      order: 0;
+    }
+
+    .about-content {
+      order: 1;
+    }
+
+    .about-media img {
+      height: clamp(300px, 48vh, 460px);
+    }
+  }
+</style>

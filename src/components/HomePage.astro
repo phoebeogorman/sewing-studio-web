@@ -1,17 +1,18 @@
 ---
 /**
- * The whole single page, composed once.
+ * The whole single page, composed from the content collection.
  *
  * The two route files under src/pages differ only in the locale they pass, so
- * the composition itself lives here instead of being copied into both.
+ * the composition itself lives here instead of being copied into both. The
+ * block list comes from src/content/home/<locale>.json: order, type and
+ * variant of every section are content, not code.
  */
+import { getEntry } from "astro:content";
 import type { Locale } from "../i18n/translations";
-import { localeHomePath, t } from "../i18n/translations";
+import { localeHomePath } from "../i18n/translations";
 import Layout from "../layouts/Layout.astro";
 import Navbar from "./Navbar.astro";
-import Hero from "./Hero.astro";
-import ServiceSection from "./ServiceSection.astro";
-import About from "./About.astro";
+import BlockRenderer from "./BlockRenderer.astro";
 import Footer from "./Footer.astro";
 
 interface Props {
@@ -19,59 +20,52 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const strings = t(locale);
 
-// Gallery order mirrors scripts/convert-assets.ps1: the lead photo of each
-// service is its known-good shot, the rest follow Drive's alphabetical order.
-const services = [
-  {
-    id: "alterations",
-    title: strings.alterations_title,
-    lead: strings.alterations_lead,
-    body: strings.alterations_body,
-    imageAlt: strings.alterations_image_alt,
-    gallery: [1, 2, 3, 4, 5].map((n) => `/images/alterations-${n}.webp`),
-  },
-  {
-    id: "workshops",
-    title: strings.workshops_title,
-    lead: strings.workshops_lead,
-    body: strings.workshops_body,
-    imageAlt: strings.workshops_image_alt,
-    gallery: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/images/workshops-${n}.webp`),
-  },
-  {
-    id: "bespoke",
-    title: strings.bespoke_title,
-    lead: strings.bespoke_lead,
-    body: strings.bespoke_body,
-    imageAlt: strings.bespoke_image_alt,
-    gallery: [1, 2, 3, 4].map((n) => `/images/bespoke-${n}.webp`),
-  },
-];
+const entry = await getEntry("home", locale);
+if (!entry) {
+  throw new Error(
+    `Missing content entry "src/content/home/${locale}.json". Every locale needs one.`
+  );
+}
+
+const { metaTitle, metaDescription, blocks } = entry.data;
+
+// The "01", "02" counter runs across numbered blocks only, so inserting an
+// unnumbered block between two services does not create a gap in the sequence.
+let numberedCount = 0;
+const rendered = blocks.map((block) => ({
+  block,
+  numberedIndex:
+    "numbered" in block && block.numbered ? ++numberedCount : undefined,
+}));
+
+// The navbar follows the block list: a block opts in by giving itself a
+// navLabel, so adding or reordering sections cannot leave the nav stale.
+const navLinks = blocks.flatMap((block) =>
+  "navLabel" in block && block.navLabel
+    ? [{ href: `#${block.id}`, label: block.navLabel }]
+    : []
+);
 ---
 
-<Layout locale={locale} canonicalPath={localeHomePath(locale)}>
-  <Navbar locale={locale} />
+<Layout
+  locale={locale}
+  canonicalPath={localeHomePath(locale)}
+  title={metaTitle}
+  description={metaDescription}
+>
+  <Navbar locale={locale} links={navLinks} />
   <main id="main-content">
-    <Hero locale={locale} />
     {
-      services.map((service, i) => (
-        <ServiceSection
+      rendered.map(({ block, numberedIndex }, i) => (
+        <BlockRenderer
+          block={block}
           locale={locale}
-          id={service.id}
-          title={service.title}
-          lead={service.lead}
-          body={service.body}
-          gallery={service.gallery}
-          imageAlt={service.imageAlt}
-          index={i + 1}
-          reversed={i % 2 === 1}
-          surface={i % 2 === 1}
+          isFirst={i === 0}
+          numberedIndex={numberedIndex}
         />
       ))
     }
-    <About locale={locale} />
   </main>
   <Footer locale={locale} />
 </Layout>

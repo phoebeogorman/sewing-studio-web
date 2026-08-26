@@ -5,25 +5,26 @@
  * A full-bleed photograph sits behind the display type. The gradient keeps
  * the black type readable without hiding the image entirely.
  */
-import type { Locale } from "../i18n/translations";
-import { contact, t } from "../i18n/translations";
+import type { Block } from "../../content.config";
+import { contact } from "../../i18n/translations";
+
+type HeroBlockData = Extract<Block, { type: "hero" }>;
 
 interface Props {
-  locale: Locale;
+  block: HeroBlockData;
+  /** Only the first block on the page renders its title as the h1. */
+  isFirst?: boolean;
 }
 
-const { locale } = Astro.props;
-const strings = t(locale);
-
-// Swap the number to change the opening shot; the candidates are
-// /images/bg-1.webp through /images/bg-4.webp.
-const heroImage = "/images/bg-1.webp";
+const { block, isFirst = false } = Astro.props;
+const TitleTag = isFirst ? "h1" : "h2";
+const headingId = `${block.id}-title`;
 ---
 
-<section class="hero" aria-labelledby="hero-title">
+<section id={block.id} class="hero" aria-labelledby={headingId}>
   <img
-    src={heroImage}
-    alt=""
+    src={block.image.src}
+    alt={block.image.alt}
     class="hero-photo"
     width="1600"
     height="1600"
@@ -33,17 +34,17 @@ const heroImage = "/images/bg-1.webp";
   <div class="hero-veil" aria-hidden="true"></div>
 
   <div class="ss-container hero-inner">
-    <p class="section-kicker">{strings.hero_kicker}</p>
-    <h1 id="hero-title" class="display-title hero-title">{strings.hero_title}</h1>
-    <p class="hero-tagline">{strings.hero_tagline}</p>
-    <p class="section-copy hero-intro">{strings.hero_intro}</p>
+    <p class="section-kicker">{block.kicker}</p>
+    <TitleTag id={headingId} class="display-title hero-title">{block.title}</TitleTag>
+    <p class="hero-tagline">{block.tagline}</p>
+    <p class="section-copy hero-intro">{block.intro}</p>
 
     <div class="hero-actions">
       <a href={`mailto:${contact.email}`} class="btn btn-primary">
-        {strings.hero_cta_primary}
+        {block.ctaPrimaryLabel}
       </a>
-      <a href="#alterations" class="btn btn-outline">
-        {strings.hero_cta_secondary}
+      <a href={block.ctaSecondaryTarget} class="btn btn-outline">
+        {block.ctaSecondaryLabel}
       </a>
     </div>
   </div>

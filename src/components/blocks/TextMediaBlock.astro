@@ -1,66 +1,62 @@
 ---
 /**
- * One service block. Used three times, once per service.
+ * Two columns: copy on one side, an image carousel on the other.
  *
- * The media column is a carousel built from the service's gallery: CSS
- * scroll-snap carries the manual gestures, and one small hoisted script adds
- * arrows, dots and an autoplay that pauses on hover, on focus and when the
- * tab is hidden.
+ * The carousel is CSS scroll-snap for the manual gestures, plus one small
+ * hoisted script that adds arrows, dots and an autoplay pausing on hover, on
+ * focus and when the tab is hidden.
  *
- * `reversed` mirrors the layout so consecutive sections alternate the side
- * the media sits on, and `surface` alternates the background between the
- * page colour and the cream surface.
+ * `mediaSide` mirrors the layout so consecutive blocks can alternate the side
+ * the media sits on, and `surface` alternates the background between the page
+ * colour and the cream surface.
  */
-import type { Locale } from "../i18n/translations";
-import { t } from "../i18n/translations";
+import type { Block } from "../../content.config";
+import type { Locale } from "../../i18n/translations";
+import { t } from "../../i18n/translations";
+
+type TextMediaBlockData = Extract<Block, { type: "text-media" }>;
 
 interface Props {
+  block: TextMediaBlockData;
   locale: Locale;
-  /** Anchor target, also used to build the heading id. */
-  id: string;
-  title: string;
-  lead: string;
-  body: string;
-  /** Ordered image URLs; the first one leads the carousel. */
-  gallery: string[];
-  imageAlt?: string;
-  index: number;
-  reversed?: boolean;
-  surface?: boolean;
+  /** 1-based position among numbered blocks; drives the "01" counter. */
+  index?: number;
 }
 
-const {
-  locale,
-  id,
-  title,
-  lead,
-  body,
-  gallery,
-  imageAlt = "",
-  index,
-  reversed = false,
-  surface = false,
-} = Astro.props;
-
+const { block, locale, index } = Astro.props;
 const strings = t(locale);
-const headingId = `${id}-title`;
-const indexLabel = String(index).padStart(2, "0");
+const headingId = `${block.id}-title`;
+const indexLabel = index === undefined ? undefined : String(index).padStart(2, "0");
+
+const labelPrev = strings.carousel_previous.replace("{title}", block.title);
+const labelNext = strings.carousel_next.replace("{title}", block.title);
 ---
 
 <section
-  id={id}
-  class:list={["service page-section", { "service--surface": surface }]}
+  id={block.id}
+  class:list={["service page-section", { "service--surface": block.surface === "cream" }]}
   aria-labelledby={headingId}
 >
-  <div class:list={["ss-container service-inner", { "service-inner--reversed": reversed }]}>
+  <div
+    class:list={[
+      "ss-container service-inner",
+      { "service-inner--reversed": block.mediaSide === "start" },
+    ]}
+  >
     <div class="service-content">
       <p class="section-kicker">
-        <span class="service-index" aria-hidden="true">{indexLabel}</span>
-        {strings.services_kicker}
+        {
+          block.numbered && indexLabel && (
+            <span class="service-index" aria-hidden="true">
+              {indexLabel}
+            </span>
+          )
+        }
+        {block.kicker}
       </p>
-      <h2 id={headingId} class="section-title service-title">{title}</h2>
-      <p class="service-lead">{lead}</p>
-      <p class="section-copy">{body}</p>
+      <h2 id={headingId} class="section-title service-title">{block.title}</h2>
+      {block.lead && <p class="service-lead">{block.lead}</p>}
+      <p class="section-copy">{block.body}</p>
     </div>
 
     <div class="service-media carousel" data-carousel>
@@ -70,37 +66,49 @@ const indexLabel = String(index).padStart(2, "0");
         tabindex="0"
         role="group"
         aria-roledescription="carousel"
-        aria-label={title}
+        aria-label={block.title}
       >
         {
-          gallery.map((src) => (
+          block.gallery.map((image) => (
             <div class="carousel-slide">
-              <img src={src} alt={imageAlt} loading="lazy" decoding="async" />
+              <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
             </div>
           ))
         }
       </div>
 
       <div class="carousel-ui">
-        <button type="button" class="carousel-btn" data-carousel-prev aria-label={`Previous ${title} image`}>
+        <button
+          type="button"
+          class="carousel-btn"
+          data-carousel-prev
+          aria-label={labelPrev}
+        >
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 5l-7 7 7 7"/></svg>
         </button>
 
         <div class="carousel-dots">
           {
-            gallery.map((_, i) => (
+            block.gallery.map((_, i) => (
               <button
                 type="button"
                 class:list={["carousel-dot", { "is-active": i === 0 }]}
                 data-carousel-dot
-                aria-label={`Go to ${title} image ${i + 1}`}
+                aria-label={strings.carousel_go_to
+                  .replace("{title}", block.title)
+                  .replace("{n}", String(i + 1))}
                 aria-current={i === 0 ? "true" : undefined}
               />
             ))
           }
         </div>
 
-        <button type="button" class="carousel-btn" data-carousel-next aria-label={`Next ${title} image`}>
+        <button
+          type="button"
+          class="carousel-btn"
+          data-carousel-next
+          aria-label={labelNext}
+        >
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5l7 7-7 7"/></svg>
         </button>
       </div>
@@ -121,8 +129,38 @@ const indexLabel = String(index).padStart(2, "0");
     width: 100%;
   }
 
+  /* Same vertical rhythm as the text-image block, so the two read as one
+     family when they alternate down the page. */
+  .service-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
   .service-inner--reversed .service-content {
     order: 2;
+  }
+
+  .service-title {
+    max-width: 18ch;
+  }
+
+  /* The bridge between the display title and the grey body copy: primary
+     text colour and a step up in size, so it is not mistaken for the first
+     line of the paragraph below it. */
+  .service-lead {
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    line-height: 1.3em;
+    color: var(--text-primary);
+    max-width: 46ch;
+  }
+
+  /* Sits inside the kicker and inherits its casing and tracking; the accent
+     colour and the gap are all it needs to read as a counter. */
+  .service-index {
+    margin-right: 0.75rem;
+    color: var(--accent);
   }
 
   /* ----- carousel ------------------------------------------------------- */

@@ -1,0 +1,34 @@
+---
+/**
+ * Dispatches one content block to its component.
+ *
+ * The block list is free-form, so this is the single place that maps a `type`
+ * to a component. Adding a block type means adding its schema variant in
+ * src/content.config.ts, its component under blocks/, and one branch here.
+ *
+ * The union is exhaustive: TypeScript flags a missing branch, so a new type
+ * cannot silently render nothing.
+ */
+import type { Block } from "../content.config";
+import type { Locale } from "../i18n/translations";
+import HeroBlock from "./blocks/HeroBlock.astro";
+import TextMediaBlock from "./blocks/TextMediaBlock.astro";
+import TextImageBlock from "./blocks/TextImageBlock.astro";
+import TextBlock from "./blocks/TextBlock.astro";
+
+interface Props {
+  block: Block;
+  locale: Locale;
+  isFirst?: boolean;
+  numberedIndex?: number;
+}
+
+const { block, locale, isFirst = false, numberedIndex } = Astro.props;
+---
+
+{block.type === "hero" && <HeroBlock block={block} isFirst={isFirst} />}
+{block.type === "text-media" && (
+  <TextMediaBlock block={block} locale={locale} index={numberedIndex} />
+)}
+{block.type === "text-image" && <TextImageBlock block={block} />}
+{block.type === "text" && <TextBlock block={block} />}

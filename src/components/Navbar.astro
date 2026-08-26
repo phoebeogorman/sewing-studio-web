@@ -1,6 +1,6 @@
 ---
 /**
- * Sticky header: logo on the left, the three service anchors on the right.
+ * Sticky header: logo on the left, in-page section anchors on the right.
  *
  * The site is a single page, so every navigation link is an in-page anchor.
  * Scroll offsetting is handled by `scroll-padding-top` on the html element in
@@ -11,17 +11,13 @@ import { alternateLocale, localeHomePath, t } from "../i18n/translations";
 
 interface Props {
   locale: Locale;
+  /** Derived from the block list, so the nav cannot drift from the page. */
+  links: { href: string; label: string }[];
 }
 
-const { locale } = Astro.props;
+const { locale, links } = Astro.props;
 const strings = t(locale);
 const altLocale = alternateLocale(locale);
-
-const links = [
-  { href: "#alterations", label: strings.nav_alterations },
-  { href: "#workshops", label: strings.nav_workshops },
-  { href: "#bespoke", label: strings.nav_bespoke },
-];
 
 // The chosen language travels in the URL so that the locale script in the
 // document head persists it, rather than immediately redirecting back.
@@ -44,18 +40,20 @@ const altHref = `${localeHomePath(altLocale)}?lang=${altLocale}`;
       />
     </a>
 
-    <nav class="navbar-nav" aria-label={strings.services_kicker}>
-      <ul class="navbar-list">
-        {
-          links.map((link) => (
-            <li>
-              <a href={link.href} class="navbar-link">
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+    <nav class="navbar-nav" aria-label={strings.nav_sections_label}>
+      {
+        links.length > 0 && (
+          <ul class="navbar-list">
+            {links.map((link) => (
+              <li>
+                <a href={link.href} class="navbar-link">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
 
       <a href={altHref} class="navbar-lang" aria-label={strings.language_switch_label}>
         {strings.language_switch_text}

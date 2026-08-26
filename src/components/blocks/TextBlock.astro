@@ -1,0 +1,49 @@
+---
+/**
+ * Copy only, centred, no media. The quiet block between two heavier ones.
+ */
+import type { Block } from "../../content.config";
+
+type TextBlockData = Extract<Block, { type: "text" }>;
+
+interface Props {
+  block: TextBlockData;
+}
+
+const { block } = Astro.props;
+const headingId = `${block.id}-title`;
+---
+
+<section
+  id={block.id}
+  class:list={["text-block page-section", { "text-block--surface": block.surface === "cream" }]}
+  aria-labelledby={headingId}
+>
+  <div class="ss-container text-block-inner">
+    {block.kicker && <p class="section-kicker">{block.kicker}</p>}
+    <h2 id={headingId} class="section-title text-block-title">{block.title}</h2>
+    <p class="section-copy text-block-body">{block.body}</p>
+  </div>
+</section>
+
+<style>
+  .text-block--surface {
+    background: var(--surface);
+  }
+
+  .text-block-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+  }
+
+  .text-block-title {
+    max-width: 20ch;
+  }
+
+  .text-block-body {
+    max-width: 60ch;
+  }
+</style>
