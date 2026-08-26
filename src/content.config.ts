@@ -21,14 +21,21 @@ const surface = z.enum(["page", "cream"]).default("page");
 const mediaSide = z.enum(["start", "end"]).default("end");
 
 const imageRef = z.object({
-  /** Path under public/, e.g. "/images/bg-1.webp". */
-  src: z.string().startsWith("/images/"),
+  /** Path under public/ or src/assets/images/, e.g. "/images/bg-1.webp". */
+  src: z.string().transform((val) => {
+    if (val.startsWith("/images/")) return val;
+    if (val.startsWith("images/")) return `/${val}`;
+    return `/images/${val.replace(/^\/+/, "")}`;
+  }),
   /** Empty string marks the image as decorative. */
   alt: z.string().default(""),
 });
 
 /** Anchor-safe identifier: lowercase, starts with a letter, hyphens allowed. */
-const blockId = z.string().regex(/^[a-z][a-z0-9-]*$/);
+const blockId = z.string().transform((val) => {
+  const clean = val.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/^-+|-+$/g, "");
+  return clean || "section";
+});
 
 /** Full-bleed opening section: photograph behind display type. */
 const heroBlock = z.object({
@@ -42,8 +49,13 @@ const heroBlock = z.object({
   image: imageRef,
   ctaPrimaryLabel: z.string(),
   ctaSecondaryLabel: z.string(),
-  /** Anchor the secondary CTA scrolls to, e.g. "#alterations". */
-  ctaSecondaryTarget: z.string().startsWith("#"),
+  /** Anchor the secondary CTA scrolls to, e.g. "#alterations". Auto-prefixes # if omitted. */
+  ctaSecondaryTarget: z.string().transform((val) => {
+    if (val.startsWith("#") || val.startsWith("http") || val.startsWith("mailto:") || val.startsWith("/")) {
+      return val;
+    }
+    return `#${val}`;
+  }),
 });
 
 /**

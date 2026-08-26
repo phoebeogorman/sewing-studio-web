@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "dev:cms": "node scripts/dev-with-cms.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "cms": "decap-server",
@@ -20,6 +21,8 @@
     "tailwindcss": "4.2.1"
   },
   "devDependencies": {
-    "decap-server": "^3.10.0"
+    "decap-server": "^3.10.0",
+    "express": "^5.2.1",
+    "http-proxy-middleware": "^4.2.0"
   }
 }

@@ -3,84 +3,139 @@
   "metaDescription": "The Sewing Studio offers alterations, sewing workshops and bespoke garment making in the Ribble Valley, Lancashire.",
   "blocks": [
     {
-      "type": "hero",
-      "kicker": "Ribble Valley, Lancashire",
-      "title": "The Sewing Studio",
-      "tagline": "Slow luxury. Pure artistry.",
-      "intro": "We champion making that outlasts trends: noble textiles, exacting hand-finishing and garments built to be kept. From our Ribble Valley studio we care for the clothes you already love, teach the craft behind them, and cut one-off pieces from scratch.",
-      "image": { "src": "/images/bg-1.webp", "alt": "" },
       "ctaPrimaryLabel": "Get in touch",
-      "ctaSecondaryLabel": "Our services",
-      "ctaSecondaryTarget": "#alterations"
+      "intro": "We stand for things made to endure — honest cloth, exact hand-finishing, and garments worth keeping. From our quiet space in the Ribble Valley, we care for the clothes you already love, teach the skills behind them, and cut one-off pieces from scratch.",
+      "tagline": "Slow luxury. Quiet craft.",
+      "ctaSecondaryLabel": "Explore services",
+      "kicker": "Ribble Valley, Lancashire",
+      "ctaSecondaryTarget": "#alterations",
+      "title": "The Sewing Studio",
+      "type": "hero",
+      "id": "hero",
+      "image": {
+        "src": "/images/bg-1.webp",
+        "alt": ""
+      }
     },
     {
-      "type": "text-media",
-      "id": "alterations",
+      "body": "From a simple hem to a complete re-fit, alterations are the calm core of the studio. We take in, let out, shorten, repair, and restyle — fitting each garment to the person wearing it, not a sizing label. Bring us the jacket that never quite sat right, the dress that deserves saving, the trousers worn thin at the heel: every piece is pinned, discussed, and finished cleanly by hand.",
+      "numbered": true,
+      "surface": "page",
       "navLabel": "Alterations",
+      "gallery": [
+        {
+          "src": "/images/alterations-1.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/alterations-2.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/alterations-3.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/alterations-4.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/alterations-5.webp",
+          "alt": ""
+        }
+      ],
       "kicker": "Services",
       "title": "Alterations",
-      "lead": "New life for the clothes you already love.",
-      "body": "From a simple hem to a full reshape, alterations are the quiet heart of the studio. We take in, let out, shorten, repair and reinvent, tailoring each garment to the person who wears it rather than to a size label. Bring us the jacket that never quite sat right, the dress worth saving, the trousers worn thin at the cuff: every piece is measured, discussed and finished by hand.",
-      "gallery": [
-        { "src": "/images/alterations-1.webp", "alt": "" },
-        { "src": "/images/alterations-2.webp", "alt": "" },
-        { "src": "/images/alterations-3.webp", "alt": "" },
-        { "src": "/images/alterations-4.webp", "alt": "" },
-        { "src": "/images/alterations-5.webp", "alt": "" }
-      ],
+      "type": "text-media",
+      "id": "alterations",
       "mediaSide": "end",
-      "surface": "page",
-      "numbered": true
+      "lead": "New life for clothes you already own."
     },
     {
-      "type": "text-media",
-      "id": "workshops",
+      "body": "Our workshops are hands-on sessions for complete beginners and improving sewers alike — learning to thread a machine, handle seams and hems, read a pattern, and mend your own wardrobe with confidence. Class sizes are intentionally kept small so everyone gets time and space, and every session ends with something tangible made by your own hands. Machines and tools are provided; curiosity is all you bring.",
+      "numbered": true,
+      "surface": "cream",
       "navLabel": "Workshops",
+      "gallery": [
+        {
+          "src": "/images/workshops-1.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-2.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-3.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-4.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-5.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-6.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-7.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-8.webp",
+          "alt": ""
+        }
+      ],
       "kicker": "Services",
       "title": "Workshops",
-      "lead": "Small groups, real skills, unhurried teaching.",
-      "body": "Our workshops are hands-on sessions for beginners and improvers alike: threading a machine, mastering seams and hems, reading a pattern, altering your own clothes with confidence. Groups are kept deliberately small so everyone gets the bench space and the attention they need, and every session ends with something finished by your own hands. Machines and tools are provided; you bring the curiosity.",
-      "gallery": [
-        { "src": "/images/workshops-1.webp", "alt": "" },
-        { "src": "/images/workshops-2.webp", "alt": "" },
-        { "src": "/images/workshops-3.webp", "alt": "" },
-        { "src": "/images/workshops-4.webp", "alt": "" },
-        { "src": "/images/workshops-5.webp", "alt": "" },
-        { "src": "/images/workshops-6.webp", "alt": "" },
-        { "src": "/images/workshops-7.webp", "alt": "" },
-        { "src": "/images/workshops-8.webp", "alt": "" }
-      ],
+      "type": "text-media",
+      "id": "workshops",
       "mediaSide": "start",
-      "surface": "cream",
-      "numbered": true
+      "lead": "Small groups, real technique, unhurried learning."
     },
     {
-      "type": "text-media",
-      "id": "bespoke",
+      "body": "Bespoke is clothing built around a single person: your measurements, your movement, your choice of fabric. We work with you from initial sketch and toile to final hand-stitched details, creating garments designed to be worn for years. Whether it is an occasion piece or a quiet daily staple, every garment is drafted, cut, and constructed right here in the studio.",
+      "numbered": true,
+      "surface": "page",
       "navLabel": "Bespoke",
+      "gallery": [
+        {
+          "src": "/images/bespoke-1.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/bespoke-2.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/bespoke-3.webp",
+          "alt": ""
+        }
+      ],
       "kicker": "Services",
       "title": "Bespoke",
-      "lead": "A garment designed around one person, from first sketch to final fitting.",
-      "body": "Our bespoke process is a collaborative dialogue between form and fabric, executed with precision and a deep respect for sewing. Each commission begins with a conversation — how you live, how you move, what you want the piece to become — followed by measurements, toile fittings and patient hand-work until the garment belongs to you alone.",
-      "gallery": [
-        { "src": "/images/bespoke-1.webp", "alt": "" },
-        { "src": "/images/bespoke-2.webp", "alt": "" },
-        { "src": "/images/bespoke-3.webp", "alt": "" },
-        { "src": "/images/bespoke-4.webp", "alt": "" }
-      ],
+      "type": "text-media",
+      "id": "bespoke",
       "mediaSide": "end",
-      "surface": "page",
-      "numbered": true
+      "lead": "Made from scratch, tailored exclusively to you."
     },
     {
-      "type": "text-image",
-      "id": "about",
+      "body": "The Sewing Studio was founded by Phoebe O'Gorman as a space dedicated to mindful craft and longevity. Located in the heart of the Ribble Valley, it combines precision technical work with a relaxed atmosphere where clients and students feel equally welcome.",
+      "surface": "cream",
+      "navLabel": "The Studio",
       "kicker": "About",
-      "title": "A studio built on craft",
-      "body": "We believe in the quiet power of the slow fashion movement. Within our studio, each garment serves as an enduring testament to meticulous making. Our philosophy is rooted in a timeless pursuit of perfection, where every stitch is a deliberate creative act. Whether we are reshaping a treasured coat, guiding someone through their first seam or cutting a pattern from scratch, the standard never changes: take the time the work needs, and let it speak.",
-      "image": { "src": "/images/bg-2.webp", "alt": "" },
-      "mediaSide": "start",
-      "surface": "page"
+      "title": "The Studio",
+      "type": "text-image",
+      "id": "studio",
+      "image": {
+        "src": "/images/bg-2.webp",
+        "alt": ""
+      },
+      "mediaSide": "start"
     }
   ]
 }

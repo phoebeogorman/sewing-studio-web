@@ -10,7 +10,7 @@
  */
 
 const modules = import.meta.glob<{ default: ImageMetadata }>(
-  "./*.webp",
+  "./*.{webp,jpg,jpeg,png,avif,WEBP,JPG,JPEG,PNG,AVIF}",
   { eager: true }
 );
 

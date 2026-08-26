@@ -3,82 +3,140 @@
   "metaDescription": "The Sewing Studio ofrece arreglos de ropa, talleres de costura y confección a medida en Ribble Valley, Lancashire.",
   "blocks": [
     {
-      "type": "hero",
-      "kicker": "Ribble Valley, Lancashire",
-      "title": "The Sewing Studio",
-      "tagline": "Lujo pausado. Arte puro.",
-      "intro": "Defendemos lo que se hace para durar: tejidos nobles, acabados a mano exactos y prendas pensadas para conservarse. Desde nuestro estudio en Ribble Valley cuidamos la ropa que ya quieres, enseñamos el oficio que hay detrás y cortamos piezas únicas desde cero.",
-      "image": { "src": "/images/bg-1.webp", "alt": "" },
       "ctaPrimaryLabel": "Contactar",
+      "intro": "Defendemos lo que se hace para durar: tejidos nobles, acabados a mano exactos y prendas pensadas para conservarse. Desde nuestro estudio en Ribble Valley cuidamos la ropa que ya quieres, enseñamos el oficio que hay detrás y cortamos piezas únicas desde cero.",
+      "tagline": "Lujo pausado. Arte puro.",
       "ctaSecondaryLabel": "Nuestros servicios",
-      "ctaSecondaryTarget": "#alterations"
+      "kicker": "Ribble Valley, Lancashire",
+      "ctaSecondaryTarget": "#alterations",
+      "title": "The Sewing Studio",
+      "type": "hero",
+      "id": "hero",
+      "image": {
+        "src": "/images/bg-1.webp",
+        "alt": ""
+      }
     },
     {
-      "type": "text-media",
-      "id": "alterations",
+      "body": "De un bajo sencillo a una remodelación completa, los arreglos son el corazón sereno del estudio. Entallamos, ampliamos, acortamos, reparamos y reinventamos, adaptando cada prenda a quien la lleva y no a una etiqueta de talla. Traenos la chaqueta que nunca sentó del todo bien, el vestido que merece salvarse, los pantalones desgastados en el dobladillo: cada pieza se mide, se comenta y se termina a mano.",
+      "numbered": true,
+      "surface": "page",
       "navLabel": "Arreglos",
+      "gallery": [
+        {
+          "src": "/images/alterations-1.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/alterations-2.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/alterations-3.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/alterations-4.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/alterations-5.webp",
+          "alt": ""
+        }
+      ],
       "kicker": "Servicios",
       "title": "Arreglos",
-      "lead": "Nueva vida para la ropa que ya quieres.",
-      "body": "De un bajo sencillo a una remodelación completa, los arreglos son el corazón sereno del estudio. Entallamos, ampliamos, acortamos, reparamos y reinventamos, adaptando cada prenda a quien la lleva y no a una etiqueta de talla. Traenos la chaqueta que nunca sentó del todo bien, el vestido que merece salvarse, los pantalones desgastados en el dobladillo: cada pieza se mide, se comenta y se termina a mano.",
-      "gallery": [
-        { "src": "/images/alterations-1.webp", "alt": "" },
-        { "src": "/images/alterations-2.webp", "alt": "" },
-        { "src": "/images/alterations-3.webp", "alt": "" },
-        { "src": "/images/alterations-4.webp", "alt": "" },
-        { "src": "/images/alterations-5.webp", "alt": "" }
-      ],
+      "type": "text-media",
+      "id": "alterations",
       "mediaSide": "end",
-      "surface": "page",
-      "numbered": true
+      "lead": "Nueva vida para la ropa que ya quieres."
     },
     {
-      "type": "text-media",
-      "id": "workshops",
+      "body": "Nuestros talleres son sesiones prácticas tanto para quienes empiezan como para quienes quieren mejorar: enhebrar la máquina, dominar costuras y bajos, leer un patrón, arreglar tu propia ropa con confianza. Los grupos se mantienen pequeños a propósito, para que cada persona tenga su espacio y su atención, y cada sesión termina con algo hecho por tus propias manos. Máquinas y herramientas van de nuestra parte; la curiosidad, de la tuya.",
+      "numbered": true,
+      "surface": "cream",
       "navLabel": "Talleres",
+      "gallery": [
+        {
+          "src": "/images/workshops-1.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-2.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-3.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-4.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-5.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-6.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-7.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/workshops-8.webp",
+          "alt": ""
+        }
+      ],
       "kicker": "Servicios",
       "title": "Talleres",
-      "lead": "Grupos reducidos, oficio real, enseñanza sin prisa.",
-      "body": "Nuestros talleres son sesiones prácticas tanto para quienes empiezan como para quienes quieren mejorar: enhebrar la máquina, dominar costuras y bajos, leer un patrón, arreglar tu propia ropa con confianza. Los grupos se mantienen pequeños a propósito, para que cada persona tenga su espacio y su atención, y cada sesión termina con algo hecho por tus propias manos. Máquinas y herramientas van de nuestra parte; la curiosidad, de la tuya.",
-      "gallery": [
-        { "src": "/images/workshops-1.webp", "alt": "" },
-        { "src": "/images/workshops-2.webp", "alt": "" },
-        { "src": "/images/workshops-3.webp", "alt": "" },
-        { "src": "/images/workshops-4.webp", "alt": "" },
-        { "src": "/images/workshops-5.webp", "alt": "" },
-        { "src": "/images/workshops-6.webp", "alt": "" },
-        { "src": "/images/workshops-7.webp", "alt": "" },
-        { "src": "/images/workshops-8.webp", "alt": "" }
-      ],
+      "type": "text-media",
+      "id": "workshops",
       "mediaSide": "start",
-      "surface": "cream",
-      "numbered": true
+      "lead": "Grupos reducidos, oficio real, enseñanza sin prisa."
     },
     {
-      "type": "text-media",
-      "id": "bespoke",
+      "body": "Nuestro proceso a medida es un diálogo entre forma y tejido, ejecutado con precisión y un profundo respeto por la costura. Cada encargo empieza con una conversación: cómo vives, cómo te mueves, qué quieres que llegue a ser esa pieza; siguen las medidas, las pruebas de patronaje y un trabajo paciente a mano hasta que la prenda es solo tuya.",
+      "numbered": true,
+      "surface": "page",
       "navLabel": "A medida",
+      "gallery": [
+        {
+          "src": "/images/bespoke-1.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/bespoke-2.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/bespoke-3.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/bespoke-4.webp",
+          "alt": ""
+        }
+      ],
       "kicker": "Servicios",
       "title": "A medida",
-      "lead": "Una prenda diseñada para una sola persona, del primer boceto al último probador.",
-      "body": "Nuestro proceso a medida es un diálogo entre forma y tejido, ejecutado con precisión y un profundo respeto por la costura. Cada encargo empieza con una conversación: cómo vives, cómo te mueves, qué quieres que llegue a ser esa pieza; siguen las medidas, las pruebas de patronaje y un trabajo paciente a mano hasta que la prenda es solo tuya.",
-      "gallery": [
-        { "src": "/images/bespoke-1.webp", "alt": "" },
-        { "src": "/images/bespoke-2.webp", "alt": "" },
-        { "src": "/images/bespoke-3.webp", "alt": "" },
-        { "src": "/images/bespoke-4.webp", "alt": "" }
-      ],
+      "type": "text-media",
+      "id": "bespoke",
       "mediaSide": "end",
-      "surface": "page",
-      "numbered": true
+      "lead": "Una prenda diseñada para una sola persona, del primer boceto al último probador."
     },
     {
       "type": "text-image",
       "id": "about",
       "kicker": "Sobre nosotras",
       "title": "Un estudio hecho de oficio",
-      "body": "Creemos en la fuerza serena de la moda lenta. En nuestro estudio, cada prenda es un testimonio duradero del trabajo meticuloso. Nuestra filosofía parte de una búsqueda atemporal de la perfección, donde cada puntada es un acto creativo deliberado. Ya sea remodelar un abrigo querido, acompañar a alguien en su primera costura o trazar un patrón desde cero, el estándar nunca cambia: darle al trabajo el tiempo que pide y dejar que hable.",
-      "image": { "src": "/images/bg-2.webp", "alt": "" },
+      "body": "Creemos en la fuerza serena de la moda lenta. En nuestro estudio, cada prenda es un testimonio duradero del trabajo meticuloso. Nuestra filosofía parte de una búsqueda atemporal de la perfección, donde cada puntada es un acto creativo deliberado. Ya sea remodelar un abrigo querido, acompañar a alguien en su primera costura o trazar un patrón desde cero, el estándar nunca cambia: darle al trabajo el tiempo que pide y dejar que hable.\n11111",
+      "image": {
+        "src": "/images/bg-2.webp",
+        "alt": ""
+      },
       "mediaSide": "start",
       "surface": "page"
     }
