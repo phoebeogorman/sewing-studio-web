@@ -1,0 +1,15 @@
+{
+  "metaTitle": "aaa",
+  "metaDescription": "aaa",
+  "blocks": [
+    {
+      "type": "text",
+      "id": "hola",
+      "kicker": "",
+      "title": "hola",
+      "navLabel": "",
+      "body": "hola",
+      "surface": "page"
+    }
+  ]
+}
