@@ -1,0 +1,21 @@
+{
+  "metaTitle": "test",
+  "metaDescription": "test",
+  "blocks": [
+    {
+      "type": "hero",
+      "id": "hero1",
+      "kicker": "Test",
+      "title": "Test",
+      "tagline": "Test",
+      "intro": "Test",
+      "image": {
+        "src": "/images/IconTTSbg.png",
+        "alt": ""
+      },
+      "ctaPrimaryLabel": "aaa",
+      "ctaSecondaryLabel": "aaa",
+      "ctaSecondaryTarget": "aaa"
+    }
+  ]
+}
