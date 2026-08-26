@@ -10,6 +10,15 @@
       "navLabel": "",
       "body": "hola",
       "surface": "page"
+    },
+    {
+      "type": "text",
+      "id": "test1",
+      "kicker": "",
+      "title": "aaa",
+      "navLabel": "",
+      "body": "aaa",
+      "surface": "page"
     }
   ]
 }
