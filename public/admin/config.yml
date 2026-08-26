@@ -1,0 +1,249 @@
+# Sveltia / Decap CMS Configuration for The Sewing Studio
+# Content repository: phoebeogorman/sewing-studio-web
+
+backend:
+  name: github
+  repo: phoebeogorman/sewing-studio-web
+  branch: main
+
+# Local backend for `npm run cms` / `npx decap-server` testing without GitHub
+local_backend: true
+
+# Editorial workflow: edits create PRs for preview before publishing to main
+site_url: https://thesewing-studio.com
+display_url: https://thesewing-studio.com
+media_folder: src/assets/images
+public_folder: /images
+
+# Interface locale for the CMS UI itself
+locale: en
+
+collections:
+  - name: home
+    label: Home Page
+    label_singular: Home Page Locale
+    folder: src/content/home
+    extension: json
+    format: json
+    identifier_field: metaTitle
+    create: false
+    slug: "{{slug}}"
+    fields:
+      - name: metaTitle
+        label: Meta / SEO Title
+        widget: string
+        hint: Page title shown in search engine results and browser tabs.
+
+      - name: metaDescription
+        label: Meta / SEO Description
+        widget: text
+        hint: Short summary shown under the title in Google search results.
+
+      - name: blocks
+        label: Page Sections (Blocks)
+        widget: list
+        summary: "{{fields.title}} ({{fields.type}})"
+        types:
+          # --- HERO BLOCK ----------------------------------------------------
+          - name: hero
+            label: Hero (Opening Section)
+            widget: object
+            summary: "Hero: {{fields.title}}"
+            fields:
+              - name: type
+                widget: hidden
+                default: hero
+              - name: id
+                label: Anchor ID
+                widget: string
+                default: hero
+              - name: kicker
+                label: Kicker Label
+                widget: string
+              - name: title
+                label: Main Title
+                widget: string
+              - name: tagline
+                label: Tagline
+                widget: string
+              - name: intro
+                label: Intro Paragraph
+                widget: text
+              - name: image
+                label: Background Image
+                widget: object
+                fields:
+                  - name: src
+                    label: Image File
+                    widget: image
+                  - name: alt
+                    label: Alt Text (leave empty if decorative)
+                    widget: string
+                    required: false
+                    default: ""
+              - name: ctaPrimaryLabel
+                label: Primary CTA Button Label
+                widget: string
+              - name: ctaSecondaryLabel
+                label: Secondary CTA Button Label
+                widget: string
+              - name: ctaSecondaryTarget
+                label: Secondary CTA Target Anchor (e.g. #alterations)
+                widget: string
+
+          # --- TEXT + MEDIA (CAROUSEL) BLOCK ----------------------------------
+          - name: text-media
+            label: Section with Gallery Carousel (Text + Media)
+            widget: object
+            summary: "Carousel: {{fields.title}} (#{{fields.id}})"
+            fields:
+              - name: type
+                widget: hidden
+                default: text-media
+              - name: id
+                label: Section ID (used for links, e.g. alterations)
+                widget: string
+              - name: navLabel
+                label: Navbar Link Label (leave empty to hide from menu)
+                widget: string
+                required: false
+              - name: kicker
+                label: Kicker Label
+                widget: string
+              - name: title
+                label: Title
+                widget: string
+              - name: lead
+                label: Lead Phrase (optional subtitle)
+                widget: string
+                required: false
+              - name: body
+                label: Body Copy
+                widget: text
+              - name: gallery
+                label: Gallery Images
+                widget: list
+                summary: "{{fields.src}}"
+                fields:
+                  - name: src
+                    label: Image File
+                    widget: image
+                  - name: alt
+                    label: Alt Text
+                    widget: string
+                    required: false
+                    default: ""
+              - name: mediaSide
+                label: Image Side
+                widget: select
+                options:
+                  - label: "Right side (default)"
+                    value: end
+                  - label: "Left side (reversed)"
+                    value: start
+                default: end
+              - name: surface
+                label: Background Colour
+                widget: select
+                options:
+                  - label: "Page background (light cream)"
+                    value: page
+                  - label: "Surface background (warm cream)"
+                    value: cream
+                default: page
+              - name: numbered
+                label: "Show section number (01, 02...)"
+                widget: boolean
+                default: false
+
+          # --- TEXT + SINGLE IMAGE BLOCK --------------------------------------
+          - name: text-image
+            label: Section with Single Photo (Text + Photo)
+            widget: object
+            summary: "Single Photo: {{fields.title}} (#{{fields.id}})"
+            fields:
+              - name: type
+                widget: hidden
+                default: text-image
+              - name: id
+                label: Section ID
+                widget: string
+              - name: navLabel
+                label: Navbar Link Label (optional)
+                widget: string
+                required: false
+              - name: kicker
+                label: Kicker Label
+                widget: string
+              - name: title
+                label: Title
+                widget: string
+              - name: body
+                label: Body Copy
+                widget: text
+              - name: image
+                label: Photo
+                widget: object
+                fields:
+                  - name: src
+                    label: Image File
+                    widget: image
+                  - name: alt
+                    label: Alt Text
+                    widget: string
+                    required: false
+                    default: ""
+              - name: mediaSide
+                label: Photo Side
+                widget: select
+                options:
+                  - label: "Left side (default)"
+                    value: start
+                  - label: "Right side (reversed)"
+                    value: end
+                default: start
+              - name: surface
+                label: Background Colour
+                widget: select
+                options:
+                  - label: "Page background"
+                    value: page
+                  - label: "Cream surface"
+                    value: cream
+                default: page
+
+          # --- TEXT ONLY BLOCK ------------------------------------------------
+          - name: text
+            label: Text Only Section (Centred)
+            widget: object
+            summary: "Text: {{fields.title}} (#{{fields.id}})"
+            fields:
+              - name: type
+                widget: hidden
+                default: text
+              - name: id
+                label: Section ID
+                widget: string
+              - name: navLabel
+                label: Navbar Link Label (optional)
+                widget: string
+                required: false
+              - name: kicker
+                label: Kicker Label
+                widget: string
+                required: false
+              - name: title
+                label: Title
+                widget: string
+              - name: body
+                label: Body Copy
+                widget: text
+              - name: surface
+                label: Background Colour
+                widget: select
+                options:
+                  - label: "Page background"
+                    value: page
+                  - label: "Cream surface"
+                    value: cream
+                default: page
