@@ -11,6 +11,11 @@
  *      collapsed paragraphs — error.
  *   2. Price fields missing on the three service blocks.
  *   3. Block id lists drifted out of sync between `en` and `es`.
+ *   4. Image references pointing at an extension the asset glob does not
+ *      handle. `src/assets/images/index.ts` only resolves
+ *      webp/jpg/jpeg/png/avif, so a CMS-uploaded `.HEIC` wedged into a gallery
+ *      fails the build with a confusing "Content image not found". Reference
+ *      the converted `.webp` instead.
  *
  * Exit code is 1 on failure so CI can fail the build. Purely read-only.
  */
@@ -28,6 +33,8 @@ const paragraphs = (value) =>
     ? value
     : value.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 
+const SUPPORTED_IMAGE_EXT = /\.(webp|jpg|jpeg|png|avif)(\.\w+)?$/i;
+
 const errors = [];
 
 const files = {
@@ -40,6 +47,18 @@ for (const [locale, data] of Object.entries(files)) {
     if (["bespoke", "alterations", "workshops"].includes(block.id)) {
       if (!block.price) {
         errors.push(`${locale}.blocks.${block.id}: missing "price"`);
+      }
+    }
+    const srcs = [
+      block.image?.src,
+      ...(block.gallery ?? []).map((image) => image.src),
+    ].filter(Boolean);
+    for (const src of srcs) {
+      if (!SUPPORTED_IMAGE_EXT.test(src)) {
+        errors.push(
+          `${locale}.blocks.${block.id}: unsupported image extension in "${src}" — ` +
+            `the asset glob only handles .webp/.jpg/.jpeg/.png/.avif; convert HEIC to .webp first`,
+        );
       }
     }
   }
