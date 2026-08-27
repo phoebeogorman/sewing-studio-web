@@ -136,6 +136,20 @@
       "body": "The Sewing Studio was founded by Phoebe O'Gorman as a space dedicated to mindful craft and longevity. Located in the heart of the Ribble Valley, it combines precision technical work with a relaxed atmosphere where clients and students feel equally welcome.",
       "mediaSide": "start",
       "surface": "cream"
+    },
+    {
+      "type": "text-image",
+      "id": "test",
+      "kicker": "test",
+      "title": "test",
+      "image": {
+        "src": "/images/069.jpg",
+        "alt": ""
+      },
+      "navLabel": "test",
+      "body": "testetesttetetetette",
+      "mediaSide": "start",
+      "surface": "cream"
     }
   ]
 }
