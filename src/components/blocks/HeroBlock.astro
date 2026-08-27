@@ -40,7 +40,7 @@ const heroImg = resolveContentImage(block.image.src);
     <p class="section-kicker">{block.kicker}</p>
     <TitleTag id={headingId} class="display-title hero-title">{block.title}</TitleTag>
     <p class="hero-tagline">{block.tagline}</p>
-    <p class="section-copy hero-intro">{block.intro}</p>
+    {block.intro.map((paragraph) => <p class="section-copy hero-intro">{paragraph}</p>)}
 
     <div class="hero-actions">
       <a href={`mailto:${contact.email}`} class="btn btn-primary">

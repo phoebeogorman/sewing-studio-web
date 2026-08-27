@@ -63,7 +63,8 @@ const slides = block.gallery.map((image) => ({
       </p>
       <h2 id={headingId} class="section-title service-title">{block.title}</h2>
       {block.lead && <p class="service-lead">{block.lead}</p>}
-      <p class="section-copy">{block.body}</p>
+      {block.body.map((paragraph) => <p class="section-copy">{paragraph}</p>)}
+      {block.price && <p class="service-price">{block.price}</p>}
     </div>
 
     <div class="service-media carousel" data-carousel>
@@ -167,6 +168,19 @@ const slides = block.gallery.map((image) => ({
     line-height: 1.3em;
     color: var(--text-primary);
     max-width: 46ch;
+  }
+
+  /* Closes the block with the same small-caps voice as the kicker, so the
+     price reads as a label rather than as another line of body copy. */
+  .service-price {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
   }
 
   /* Sits inside the kicker and inherits its casing and tracking; the accent

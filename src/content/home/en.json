@@ -1,21 +1,57 @@
 {
-  "metaTitle": "The Sewing Studio — Alterations, Workshops & Bespoke",
-  "metaDescription": "The Sewing Studio offers alterations, sewing workshops and bespoke garment making in the Ribble Valley, Lancashire.",
+  "metaTitle": "The Sewing Studio — Bespoke, Alterations & Workshops",
+  "metaDescription": "The Sewing Studio offers bespoke garment making, alterations and sewing workshops in the Ribble Valley, Lancashire.",
   "blocks": [
     {
       "type": "hero",
       "id": "hero",
       "kicker": "Ribble Valley, Lancashire",
       "title": "The Sewing Studio",
-      "tagline": "Slow luxury. Quiet craft.",
-      "intro": "We stand for things made to endure — honest cloth, exact hand-finishing, and garments worth keeping. From our quiet space in the Ribble Valley, we care for the clothes you already love, teach the skills behind them, and cut one-off pieces from scratch.",
+      "tagline": "Considered craft. Refined making.",
+      "intro": [
+        "From precise alterations and bespoke garments to small, hands-on sewing workshops, the studio offers a personal approach to making. Each garment is considered individually, with careful attention given to fit, construction, fabric and finish."
+      ],
       "image": {
         "src": "/images/bg-1.webp",
         "alt": ""
       },
       "ctaPrimaryLabel": "Get in touch",
       "ctaSecondaryLabel": "Explore services",
-      "ctaSecondaryTarget": "#alterations"
+      "ctaSecondaryTarget": "#bespoke"
+    },
+    {
+      "type": "text-media",
+      "id": "bespoke",
+      "kicker": "Services",
+      "title": "Bespoke",
+      "navLabel": "Bespoke",
+      "lead": "A considered, made-to-measure service shaped around the individual.",
+      "body": [
+        "Each bespoke garment begins with a personal consultation to understand your requirements, preferences and the vision for the piece. From there, the garment is developed through precise pattern cutting, fabric selection and a series of fittings, allowing every detail to be refined.",
+        "From the initial concept through to final construction, each piece is carefully considered to create a garment that feels personal, beautifully finished and designed to be worn for years to come."
+      ],
+      "price": "Priced on application",
+      "gallery": [
+        {
+          "src": "/images/bespoke-1.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/bespoke-2.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/bespoke-3.webp",
+          "alt": ""
+        },
+        {
+          "src": "/images/bespoke-4.webp",
+          "alt": ""
+        }
+      ],
+      "mediaSide": "end",
+      "surface": "page",
+      "numbered": true
     },
     {
       "type": "text-media",
@@ -23,8 +59,12 @@
       "kicker": "Services",
       "title": "Alterations",
       "navLabel": "Alterations",
-      "lead": "New life for clothes you already own.",
-      "body": "From a simple hem to a complete re-fit, alterations are the calm core of the studio. We take in, let out, shorten, repair, and restyle — fitting each garment to the person wearing it, not a sizing label. Bring us the jacket that never quite sat right, the dress that deserves saving, the trousers worn thin at the heel: every piece is pinned, discussed, and finished cleanly by hand.",
+      "lead": "From everyday tailoring to bridal and occasionwear, garments are carefully refined to achieve a more considered fit, balance and finish.",
+      "body": [
+        "Each alteration is approached individually, taking into consideration the original construction, fabric and proportions of the garment. Whether it is a simple adjustment or a more technical alteration, the aim is to preserve the character of the piece while creating a fit that feels effortless.",
+        "Bridal, formalwear and more complex alterations are also undertaken, with fittings arranged where required to ensure a precise result."
+      ],
+      "price": "From £20",
       "gallery": [
         {
           "src": "/images/alterations-1.webp",
@@ -47,8 +87,8 @@
           "alt": ""
         }
       ],
-      "mediaSide": "end",
-      "surface": "page",
+      "mediaSide": "start",
+      "surface": "cream",
       "numbered": true
     },
     {
@@ -57,8 +97,13 @@
       "kicker": "Services",
       "title": "Workshops",
       "navLabel": "Workshops",
-      "lead": "Small groups, real technique, unhurried learning.",
-      "body": "Our workshops are hands-on sessions for complete beginners and improving sewers alike — learning to thread a machine, handle seams and hems, read a pattern, and mend your own wardrobe with confidence. Class sizes are intentionally kept small so everyone gets time and space, and every session ends with something tangible made by your own hands. Machines and tools are provided; curiosity is all you bring.",
+      "lead": "Small, focused sewing sessions held within the studio, designed to develop confidence, technique and a deeper understanding of garment making.",
+      "body": [
+        "Workshops are suitable for all levels and ages, from complete beginners learning the fundamentals to those looking to build on their existing sewing skills. Sessions combine practical learning with a considered approach to making, introducing techniques that can be carried forward into future projects.",
+        "With small group sizes, each session offers individual guidance, whether you are working on a set studio project or developing a project of your own. The relaxed, hands-on environment allows you to learn at your own pace while receiving support throughout the process.",
+        "All sewing machinery and equipment is available to use within the studio, with fabrics and materials provided for beginner projects."
+      ],
+      "price": "£40 per session",
       "gallery": [
         {
           "src": "/images/workshops-1.webp",
@@ -93,32 +138,6 @@
           "alt": ""
         }
       ],
-      "mediaSide": "start",
-      "surface": "cream",
-      "numbered": true
-    },
-    {
-      "type": "text-media",
-      "id": "bespoke",
-      "kicker": "Services",
-      "title": "Bespoke",
-      "navLabel": "Bespoke",
-      "lead": "Made from scratch, tailored exclusively to you.",
-      "body": "Bespoke is clothing built around a single person: your measurements, your movement, your choice of fabric. We work with you from initial sketch and toile to final hand-stitched details, creating garments designed to be worn for years. Whether it is an occasion piece or a quiet daily staple, every garment is drafted, cut, and constructed right here in the studio.",
-      "gallery": [
-        {
-          "src": "/images/bespoke-1.webp",
-          "alt": ""
-        },
-        {
-          "src": "/images/bespoke-2.webp",
-          "alt": ""
-        },
-        {
-          "src": "/images/bespoke-3.webp",
-          "alt": ""
-        }
-      ],
       "mediaSide": "end",
       "surface": "page",
       "numbered": true
@@ -128,12 +147,17 @@
       "id": "studio",
       "kicker": "About",
       "title": "The Studio",
+      "navLabel": "The Studio",
+      "body": [
+        "The Sewing Studio was founded by fashion designer and maker Phoebe O'Gorman in 2024, from a desire to create a space centred around craftsmanship, creativity and considered making. Based in the Ribble Valley, Lancashire, the studio brings together Phoebe's background in fashion design and tailoring with her passion for creating, refining and sharing the skills behind well-made clothing.",
+        "Phoebe takes a personal and considered approach to every piece. Working from her private studio in Waddington, West Bradford, she creates a relaxed and welcoming environment where garments are carefully refined, ideas are brought to life, and sewing skills are shared.",
+        "Alongside the studio, Phoebe established her namesake label, Phoebe O'Gorman, creating limited pieces that reflect her approach to structure, form and longevity.",
+        "At the heart of the studio is a simple belief: that well-made clothing deserves to be valued, cared for and kept."
+      ],
       "image": {
         "src": "/images/bg-2.webp",
         "alt": ""
       },
-      "navLabel": "The Studio",
-      "body": "The Sewing Studio was founded by Phoebe O'Gorman as a space dedicated to mindful craft and longevity. Located in the heart of the Ribble Valley, it combines precision technical work with a relaxed atmosphere where clients and students feel equally welcome.",
       "mediaSide": "start",
       "surface": "cream"
     }

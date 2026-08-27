@@ -31,6 +31,20 @@ const imageRef = z.object({
   alt: z.string().default(""),
 });
 
+/**
+ * Body copy as one or more paragraphs. A plain string stays a single
+ * paragraph, so short blocks are not forced into array syntax.
+ */
+const body = z
+  .union([z.string(), z.array(z.string()).min(1)])
+  .transform((val) => (Array.isArray(val) ? val : [val]));
+
+/**
+ * Price line shown after the copy, e.g. "From £20". Free text rather than a
+ * number: several services are quoted per session or on application.
+ */
+const price = z.string().optional();
+
 /** Anchor-safe identifier: lowercase, starts with a letter, hyphens allowed. */
 const blockId = z.string().transform((val) => {
   const clean = val.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/^-+|-+$/g, "");
@@ -45,7 +59,7 @@ const heroBlock = z.object({
   kicker: z.string(),
   title: z.string(),
   tagline: z.string(),
-  intro: z.string(),
+  intro: body,
   image: imageRef,
   ctaPrimaryLabel: z.string(),
   ctaSecondaryLabel: z.string(),
@@ -74,7 +88,8 @@ const textMediaBlock = z.object({
   kicker: z.string(),
   title: z.string(),
   lead: z.string().optional(),
-  body: z.string(),
+  body,
+  price,
   gallery: z.array(imageRef).min(1),
   mediaSide,
   surface,
@@ -89,7 +104,7 @@ const textImageBlock = z.object({
   navLabel,
   kicker: z.string(),
   title: z.string(),
-  body: z.string(),
+  body,
   image: imageRef,
   mediaSide,
   surface,
@@ -102,7 +117,7 @@ const textBlock = z.object({
   navLabel,
   kicker: z.string().optional(),
   title: z.string(),
-  body: z.string(),
+  body,
   surface,
 });
 
