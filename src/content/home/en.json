@@ -29,6 +29,10 @@
       "priceCta": "Contact us",
       "gallery": [
         {
+          "src": "/images/classic-car.heic",
+          "alt": ""
+        },
+        {
           "src": "/images/bespoke-1.webp",
           "alt": ""
         },
@@ -105,7 +109,7 @@
           "alt": ""
         },
         {
-          "src": "/images/IMG_2172.webp",
+          "src": "/images/IMG_2172.HEIC",
           "alt": ""
         },
         {
