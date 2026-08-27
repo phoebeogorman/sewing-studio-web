@@ -3,7 +3,7 @@ backend:
   name: github
   repo: phoebeogorman/sewing-studio-web
   branch: main
-  base_url: https://sewing-studio-web.uo270394.workers.dev
+  base_url: https://sveltia-cms-auth.uo270394.workers.dev
 
 local_backend: true
 
