@@ -46,8 +46,8 @@
       "mediaSide": "end",
       "surface": "page",
       "numbered": true,
-      "priceCta": "Contact us",
-      "price": "Priced on application"
+      "price": "Priced on application",
+      "priceCta": "Contact us"
     },
     {
       "type": "text-media",
@@ -98,7 +98,7 @@
           "alt": ""
         },
         {
-          "src": "/images/workshops-2.webp",
+          "src": "/images/IMG_2172.HEIC",
           "alt": ""
         },
         {
