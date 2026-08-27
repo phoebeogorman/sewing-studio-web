@@ -58,6 +58,7 @@
       "lead": "From everyday tailoring to bridal and occasionwear, garments are carefully refined to achieve a more considered fit, balance and finish.",
       "body": "Each alteration is approached individually, taking into consideration the original construction, fabric and proportions of the garment. Whether it is a simple adjustment or a more technical alteration, the aim is to preserve the character of the piece while creating a fit that feels effortless.\n\nBridal, formalwear and more complex alterations are also undertaken, with fittings arranged where required to ensure a precise result.",
       "price": "From £20",
+      "priceCta": "",
       "gallery": [
         {
           "src": "/images/IMG_3465.JPG",
@@ -93,6 +94,7 @@
       "lead": "Small, focused sewing sessions held within the studio, designed to develop confidence, technique and a deeper understanding of garment making.",
       "body": "Workshops are suitable for all levels and ages, from complete beginners learning the fundamentals to those looking to build on their existing sewing skills. Sessions combine practical learning with a considered approach to making, introducing techniques that can be carried forward into future projects.\n\nWith small group sizes, each session offers individual guidance, whether you are working on a set studio project or developing a project of your own. The relaxed, hands-on environment allows you to learn at your own pace while receiving support throughout the process.\n\nAll sewing machinery and equipment is available to use within the studio, with fabrics and materials provided for beginner projects.",
       "price": "£40 per session",
+      "priceCta": "",
       "gallery": [
         {
           "src": "/images/workshops-1.webp",
@@ -103,7 +105,7 @@
           "alt": ""
         },
         {
-          "src": "/images/workshops-3.webp",
+          "src": "/images/IMG_2172.HEIC",
           "alt": ""
         },
         {
@@ -136,12 +138,12 @@
       "id": "studio",
       "kicker": "About",
       "title": "The Studio",
-      "navLabel": "The Studio",
-      "body": "The Sewing Studio was founded by fashion designer and maker Phoebe O'Gorman in 2024, from a desire to create a space centred around craftsmanship, creativity and considered making. Based in the Ribble Valley, Lancashire, the studio brings together Phoebe's background in fashion design and tailoring with her passion for creating, refining and sharing the skills behind well-made clothing.\n\nPhoebe takes a personal and considered approach to every piece. Working from her private studio in Waddington, West Bradford, she creates a relaxed and welcoming environment where garments are carefully refined, ideas are brought to life, and sewing skills are shared.\n\nAlongside the studio, Phoebe established her namesake label, Phoebe O'Gorman, creating limited pieces that reflect her approach to structure, form and longevity.\n\nAt the heart of the studio is a simple belief: that well-made clothing deserves to be valued, cared for and kept.",
       "image": {
         "src": "/images/bg-2.webp",
         "alt": ""
       },
+      "navLabel": "The Studio",
+      "body": "The Sewing Studio was founded by fashion designer and maker Phoebe O'Gorman in 2024, from a desire to create a space centred around craftsmanship, creativity and considered making. Based in the Ribble Valley, Lancashire, the studio brings together Phoebe's background in fashion design and tailoring with her passion for creating, refining and sharing the skills behind well-made clothing.\n\nPhoebe takes a personal and considered approach to every piece. Working from her private studio in Waddington, West Bradford, she creates a relaxed and welcoming environment where garments are carefully refined, ideas are brought to life, and sewing skills are shared.\n\nAlongside the studio, Phoebe established her namesake label, Phoebe O'Gorman, creating limited pieces that reflect her approach to structure, form and longevity.\n\nAt the heart of the studio is a simple belief: that well-made clothing deserves to be valued, cared for and kept.",
       "mediaSide": "start",
       "surface": "cream"
     }
