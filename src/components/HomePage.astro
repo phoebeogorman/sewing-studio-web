@@ -72,38 +72,46 @@ const navLinks = blocks.flatMap((block) =>
 </Layout>
 
 <dialog class="lightbox" data-lightbox aria-label={strings.lightbox_label}>
-  <div class="lightbox-frame">
+  {/* Photo navigation is revealed only when the source image belongs to a
+      gallery with more than one image. */}
+  <button
+    type="button"
+    class="lightbox-nav lightbox-nav--prev"
+    data-lightbox-prev
+    hidden
+    aria-label={strings.lightbox_previous}
+  >
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+
+  <div class="lightbox-frame" data-lightbox-frame>
     <img class="lightbox-img" alt="" src="" data-lightbox-img />
   </div>
-  <div class="lightbox-controls">
-    <button
-      type="button"
-      class="lightbox-btn"
-      data-lightbox-out
-      aria-label={strings.lightbox_zoom_out}
-    >
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14"/></svg>
-    </button>
-    <button
-      type="button"
-      class="lightbox-btn"
-      data-lightbox-in
-      aria-label={strings.lightbox_zoom_in}
-    >
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-    </button>
-    <button
-      type="button"
-      class="lightbox-btn"
-      data-lightbox-close
-      aria-label={strings.lightbox_close}
-    >
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
-    </button>
-  </div>
+
+  <button
+    type="button"
+    class="lightbox-nav lightbox-nav--next"
+    data-lightbox-next
+    hidden
+    aria-label={strings.lightbox_next}
+  >
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+
+  <button
+    type="button"
+    class="lightbox-btn"
+    data-lightbox-close
+    aria-label={strings.lightbox_close}
+  >
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
 </dialog>
 
 <style>
+  /* The viewer is a card lifted from the page, not a black cinema screen:
+     the panel keeps the site surface and the backdrop is a soft neutral
+     scrim so the page stays visible behind it. */
   .lightbox {
     position: fixed;
     inset: 0;
@@ -113,16 +121,17 @@ const navLinks = blocks.flatMap((block) =>
     max-width: none;
     max-height: none;
     padding: clamp(0.75rem, 2vw, 1.25rem);
-    border: 0;
-    background: var(--color-black);
-    color: var(--color-white-cream);
+    border: 1px solid var(--border-strong);
+    background: var(--background);
+    color: var(--text-primary);
     overflow: hidden;
-    box-shadow: 0 24px 64px -24px
-      color-mix(in srgb, var(--color-black) 60%, transparent);
+    box-shadow: 0 28px 80px -28px
+      color-mix(in srgb, var(--color-black) 45%, transparent);
   }
 
   .lightbox::backdrop {
-    background: color-mix(in srgb, var(--color-black) 70%, transparent);
+    background: color-mix(in srgb, var(--color-black) 22%, transparent);
+    backdrop-filter: blur(2px);
   }
 
   .lightbox-frame {
@@ -132,6 +141,7 @@ const navLinks = blocks.flatMap((block) =>
     width: 100%;
     height: 100%;
     overflow: hidden;
+    touch-action: none;
   }
 
   .lightbox-img {
@@ -140,33 +150,71 @@ const navLinks = blocks.flatMap((block) =>
     object-fit: contain;
     transform-origin: center;
     transition: transform var(--duration-base) var(--ease-out);
+    user-select: none;
   }
 
-  .lightbox-controls {
+  /* Photo navigation, centred on the left and right edges. Kept until the
+     image comes from a gallery; `hidden` kicks in otherwise. */
+  .lightbox-nav {
     position: absolute;
-    top: clamp(0.5rem, 1.5vw, 1rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--background) 82%, transparent);
+    backdrop-filter: blur(4px);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out);
+  }
+
+  .lightbox-nav[hidden] {
+    display: none;
+  }
+
+  .lightbox-nav:hover {
+    border-color: var(--border-strong);
+    background: var(--surface);
+  }
+
+  .lightbox-nav--prev {
+    left: clamp(0.5rem, 1.5vw, 1rem);
+  }
+
+  .lightbox-nav--next {
     right: clamp(0.5rem, 1.5vw, 1rem);
-    display: flex;
-    gap: 0.5rem;
   }
 
   .lightbox-btn {
+    position: absolute;
+    top: clamp(0.5rem, 1.5vw, 1rem);
+    right: clamp(0.5rem, 1.5vw, 1rem);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 42px;
     height: 42px;
     padding: 0;
-    border: 1px solid color-mix(in srgb, var(--color-white-cream) 40%, transparent);
+    border: 1px solid var(--border);
     border-radius: var(--radius-pill);
-    background: color-mix(in srgb, var(--color-black) 45%, transparent);
-    color: var(--color-white-cream);
+    background: color-mix(in srgb, var(--background) 82%, transparent);
+    backdrop-filter: blur(4px);
+    color: var(--text-primary);
     cursor: pointer;
-    transition: background var(--duration-fast) var(--ease-out);
+    transition: border-color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out);
   }
 
   .lightbox-btn:hover {
-    background: color-mix(in srgb, var(--color-white-cream) 15%, transparent);
+    border-color: var(--border-strong);
+    background: var(--surface);
   }
 </style>
 
@@ -297,21 +345,56 @@ const navLinks = blocks.flatMap((block) =>
   // ----- lightbox -----------------------------------------------------------
   const dialog = document.querySelector("[data-lightbox]");
   if (dialog) {
+    const frame = dialog.querySelector("[data-lightbox-frame]");
     const img = dialog.querySelector("[data-lightbox-img]");
     const closeBtn = dialog.querySelector("[data-lightbox-close]");
-    const zoomIn = dialog.querySelector("[data-lightbox-in]");
-    const zoomOut = dialog.querySelector("[data-lightbox-out]");
+    const prevBtn = dialog.querySelector("[data-lightbox-prev]");
+    const nextBtn = dialog.querySelector("[data-lightbox-next]");
+    let gallery = [];
+    let index = 0;
     let zoom = 1;
 
+    const clampZoom = (value) => Math.min(4, Math.max(1, value));
+
     const applyZoom = (value) => {
-      zoom = Math.min(4, Math.max(1, Math.round(value * 2) / 2));
+      zoom = clampZoom(value);
       img.style.transform = zoom === 1 ? "" : `scale(${zoom})`;
     };
 
-    const openLightbox = (source) => {
-      img.src = source.currentSrc || source.src;
-      img.alt = source.alt || "";
+    const setImage = () => {
+      img.src = gallery[index].src;
+      img.alt = gallery[index].alt || "";
       applyZoom(1);
+    };
+
+    const renderNav = () => {
+      const multi = gallery.length > 1;
+      prevBtn.hidden = !multi;
+      nextBtn.hidden = !multi;
+    };
+
+    const goToIndex = (target) => {
+      if (gallery.length < 2) return;
+      index = (target + gallery.length) % gallery.length;
+      setImage();
+    };
+
+    const openLightbox = (source) => {
+      // A carousel source opens in gallery mode (arrows, swipe and arrow keys),
+      // any other image opens alone.
+      const carousel = source.closest("[data-carousel]");
+      if (carousel) {
+        gallery = Array.from(carousel.querySelectorAll("[data-carousel-track] img")).map(
+          (i) => ({ src: i.currentSrc || i.src, alt: i.alt })
+        );
+      } else {
+        gallery = [{ src: source.currentSrc || source.src, alt: source.alt || "" }];
+      }
+      const current = source.currentSrc || source.src;
+      index = gallery.findIndex((entry) => entry.src === current);
+      if (index < 0) index = 0;
+      setImage();
+      renderNav();
       if (dialog.open) dialog.close();
       dialog.showModal();
     };
@@ -324,8 +407,82 @@ const navLinks = blocks.flatMap((block) =>
     });
 
     closeBtn.addEventListener("click", () => dialog.close());
-    zoomIn.addEventListener("click", () => applyZoom(zoom + 0.5));
-    zoomOut.addEventListener("click", () => applyZoom(zoom - 0.5));
+    prevBtn.addEventListener("click", () => goToIndex(index - 1));
+    nextBtn.addEventListener("click", () => goToIndex(index + 1));
+
+    // Wheel zooms in place; the page under the modal is inert, so the gesture
+    // cannot scroll anything else.
+    frame.addEventListener("wheel", (event) => {
+      if (!dialog.open) return;
+      event.preventDefault();
+      const factor = event.deltaY < 0 ? 1.15 : 1 / 1.15;
+      applyZoom(zoom * factor);
+    });
+
+    // Pointer gestures: pinch zooms on touch; a horizontal drag at zoom level 1
+    // moves between photos.
+    const pointers = new Map();
+    let startDistance = 0;
+    let startZoom = 1;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let lastX = 0;
+    let lastY = 0;
+
+    frame.addEventListener("pointerdown", (event) => {
+      if (!dialog.open) return;
+      try {
+        frame.setPointerCapture(event.pointerId);
+      } catch {
+        // The pointer may already be gone between events; capture is a nicety.
+      }
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      lastX = event.clientX;
+      lastY = event.clientY;
+      if (pointers.size === 1) {
+        dragStartX = event.clientX;
+        dragStartY = event.clientY;
+      }
+      if (pointers.size === 2) {
+        const [a, b] = [...pointers.values()];
+        startDistance = Math.hypot(a.x - b.x, a.y - b.y);
+        startZoom = zoom;
+      }
+    });
+
+    frame.addEventListener("pointermove", (event) => {
+      if (!dialog.open || !pointers.has(event.pointerId)) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      lastX = event.clientX;
+      lastY = event.clientY;
+      if (pointers.size === 2) {
+        const [a, b] = [...pointers.values()];
+        const distance = Math.hypot(a.x - b.x, a.y - b.y);
+        if (startDistance > 0) applyZoom(startZoom * (distance / startDistance));
+      }
+    });
+
+    const endPointer = (event) => {
+      if (!pointers.has(event.pointerId)) return;
+      const wasPinch = pointers.size === 2;
+      pointers.delete(event.pointerId);
+      if (!wasPinch && pointers.size === 0 && zoom === 1) {
+        const dx = lastX - dragStartX;
+        const dy = lastY - dragStartY;
+        if (Math.abs(dx) > 60 && Math.abs(dy) < 120) {
+          goToIndex(index + (dx < 0 ? 1 : -1));
+        }
+      }
+    };
+
+    frame.addEventListener("pointerup", endPointer);
+    frame.addEventListener("pointercancel", endPointer);
+
+    document.addEventListener("keydown", (event) => {
+      if (!dialog.open) return;
+      if (event.key === "ArrowLeft") goToIndex(index - 1);
+      if (event.key === "ArrowRight") goToIndex(index + 1);
+    });
 
     dialog.addEventListener("click", (event) => {
       if (event.target === dialog) dialog.close();

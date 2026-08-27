@@ -55,8 +55,9 @@ export interface Translations {
   /** Button label on openable images, e.g. "View {title} image". */
   lightbox_open: string;
   lightbox_close: string;
-  lightbox_zoom_in: string;
-  lightbox_zoom_out: string;
+  /** Photo navigation labels for galleries, shown as arrows. */
+  lightbox_previous: string;
+  lightbox_next: string;
 }
 
 /**
@@ -102,8 +103,8 @@ export const translations: Record<Locale, Translations> = {
     lightbox_label: "Image viewer",
     lightbox_open: "View {title} image",
     lightbox_close: "Close",
-    lightbox_zoom_in: "Zoom in",
-    lightbox_zoom_out: "Zoom out",
+    lightbox_previous: "Previous image",
+    lightbox_next: "Next image",
   },
 
   es: {
@@ -134,8 +135,8 @@ export const translations: Record<Locale, Translations> = {
     lightbox_label: "Visor de imagen",
     lightbox_open: "Ver imagen de {title}",
     lightbox_close: "Cerrar",
-    lightbox_zoom_in: "Ampliar",
-    lightbox_zoom_out: "Reducir",
+    lightbox_previous: "Imagen anterior",
+    lightbox_next: "Imagen siguiente",
   },
 };
 
