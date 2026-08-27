@@ -45,6 +45,12 @@ const body = z
  */
 const price = z.string().optional();
 
+/**
+ * Small label of a mailto link rendered next to the price, used when the
+ * price is not a number, e.g. "Priced on application".
+ */
+const priceCta = z.string().optional();
+
 /** Anchor-safe identifier: lowercase, starts with a letter, hyphens allowed. */
 const blockId = z.string().transform((val) => {
   const clean = val.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/^-+|-+$/g, "");
@@ -90,6 +96,7 @@ const textMediaBlock = z.object({
   lead: z.string().optional(),
   body,
   price,
+  priceCta,
   gallery: z.array(imageRef).min(1),
   mediaSide,
   surface,

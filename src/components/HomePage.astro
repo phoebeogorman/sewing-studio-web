@@ -9,7 +9,7 @@
  */
 import { getEntry } from "astro:content";
 import type { Locale } from "../i18n/translations";
-import { localeHomePath } from "../i18n/translations";
+import { localeHomePath, t } from "../i18n/translations";
 import Layout from "../layouts/Layout.astro";
 import Navbar from "./Navbar.astro";
 import BlockRenderer from "./BlockRenderer.astro";
@@ -20,6 +20,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const strings = t(locale);
 
 const entry = await getEntry("home", locale);
 if (!entry) {
@@ -69,3 +70,267 @@ const navLinks = blocks.flatMap((block) =>
   </main>
   <Footer locale={locale} />
 </Layout>
+
+<dialog class="lightbox" data-lightbox aria-label={strings.lightbox_label}>
+  <div class="lightbox-frame">
+    <img class="lightbox-img" alt="" src="" data-lightbox-img />
+  </div>
+  <div class="lightbox-controls">
+    <button
+      type="button"
+      class="lightbox-btn"
+      data-lightbox-out
+      aria-label={strings.lightbox_zoom_out}
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14"/></svg>
+    </button>
+    <button
+      type="button"
+      class="lightbox-btn"
+      data-lightbox-in
+      aria-label={strings.lightbox_zoom_in}
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+    <button
+      type="button"
+      class="lightbox-btn"
+      data-lightbox-close
+      aria-label={strings.lightbox_close}
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: min(1200px, 94vw);
+    height: min(86dvh, 900px);
+    max-width: none;
+    max-height: none;
+    padding: clamp(0.75rem, 2vw, 1.25rem);
+    border: 0;
+    background: var(--color-black);
+    color: var(--color-white-cream);
+    overflow: hidden;
+    box-shadow: 0 24px 64px -24px
+      color-mix(in srgb, var(--color-black) 60%, transparent);
+  }
+
+  .lightbox::backdrop {
+    background: color-mix(in srgb, var(--color-black) 70%, transparent);
+  }
+
+  .lightbox-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transform-origin: center;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .lightbox-controls {
+    position: absolute;
+    top: clamp(0.5rem, 1.5vw, 1rem);
+    right: clamp(0.5rem, 1.5vw, 1rem);
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .lightbox-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid color-mix(in srgb, var(--color-white-cream) 40%, transparent);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-black) 45%, transparent);
+    color: var(--color-white-cream);
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--ease-out);
+  }
+
+  .lightbox-btn:hover {
+    background: color-mix(in srgb, var(--color-white-cream) 15%, transparent);
+  }
+</style>
+
+<script>
+  // One hoisted module wires the whole page: mobile nav, image carousels and
+  // the fullscreen lightbox. All selectors are opt-in data attributes, so the
+  // script degrades to a no-op if a section is ever removed.
+
+  // ----- mobile nav -------------------------------------------------------
+  const nav = document.querySelector("[data-nav-menu]");
+  const toggle = document.querySelector("[data-nav-toggle]");
+  if (nav && toggle) {
+    const closeMenu = () => {
+      nav.removeAttribute("data-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", toggle.dataset.openLabel ?? "");
+    };
+    const openMenu = () => {
+      nav.setAttribute("data-open", "");
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", toggle.dataset.closeLabel ?? "");
+    };
+    toggle.addEventListener("click", () => {
+      if (nav.hasAttribute("data-open")) closeMenu();
+      else openMenu();
+    });
+    nav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMenu();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && nav.hasAttribute("data-open")) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+    const desktop = window.matchMedia("(min-width: 861px)");
+    desktop.addEventListener("change", (event) => {
+      if (event.matches) closeMenu();
+    });
+  }
+
+  // ----- carousels ---------------------------------------------------------
+  const AUTOPLAY_MS = 5000;
+
+  function setupCarousel(root) {
+    const track = root.querySelector("[data-carousel-track]");
+    const prevBtn = root.querySelector("[data-carousel-prev]");
+    const nextBtn = root.querySelector("[data-carousel-next]");
+    const dots = Array.from(root.querySelectorAll("[data-carousel-dot]"));
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const slides = Array.from(track.children);
+    if (slides.length < 2) {
+      root.querySelector(".carousel-ui")?.remove();
+      return;
+    }
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let paused = false;
+    let timer = 0;
+
+    const currentIndex = () =>
+      Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / track.clientWidth)));
+
+    const goTo = (target, behavior) => {
+      const clamped = (target + slides.length) % slides.length;
+      track.scrollTo({
+        left: clamped * track.clientWidth,
+        behavior: behavior ?? (prefersReduced ? "auto" : "smooth"),
+      });
+    };
+
+    const syncDots = () => {
+      const active = currentIndex();
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === active);
+        if (i === active) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+    };
+
+    const restartAutoplay = () => {
+      window.clearInterval(timer);
+      if (prefersReduced || paused) return;
+      timer = window.setInterval(() => goTo(currentIndex() + 1), AUTOPLAY_MS);
+    };
+
+    prevBtn.addEventListener("click", () => {
+      goTo(currentIndex() - 1);
+      restartAutoplay();
+    });
+    nextBtn.addEventListener("click", () => {
+      goTo(currentIndex() + 1);
+      restartAutoplay();
+    });
+    dots.forEach((dot, i) =>
+      dot.addEventListener("click", () => {
+        goTo(i);
+        restartAutoplay();
+      })
+    );
+
+    let scrollRaf = 0;
+    track.addEventListener(
+      "scroll",
+      () => {
+        window.cancelAnimationFrame(scrollRaf);
+        scrollRaf = window.requestAnimationFrame(syncDots);
+      },
+      { passive: true }
+    );
+
+    root.addEventListener("pointerenter", () => { paused = true; restartAutoplay(); });
+    root.addEventListener("pointerleave", () => { paused = false; restartAutoplay(); });
+    root.addEventListener("focusin", () => { paused = true; restartAutoplay(); });
+    root.addEventListener("focusout", () => { paused = false; restartAutoplay(); });
+
+    document.addEventListener("visibilitychange", () => {
+      paused = document.hidden;
+      restartAutoplay();
+    });
+
+    restartAutoplay();
+  }
+
+  document.querySelectorAll("[data-carousel]").forEach(setupCarousel);
+
+  // ----- lightbox -----------------------------------------------------------
+  const dialog = document.querySelector("[data-lightbox]");
+  if (dialog) {
+    const img = dialog.querySelector("[data-lightbox-img]");
+    const closeBtn = dialog.querySelector("[data-lightbox-close]");
+    const zoomIn = dialog.querySelector("[data-lightbox-in]");
+    const zoomOut = dialog.querySelector("[data-lightbox-out]");
+    let zoom = 1;
+
+    const applyZoom = (value) => {
+      zoom = Math.min(4, Math.max(1, Math.round(value * 2) / 2));
+      img.style.transform = zoom === 1 ? "" : `scale(${zoom})`;
+    };
+
+    const openLightbox = (source) => {
+      img.src = source.currentSrc || source.src;
+      img.alt = source.alt || "";
+      applyZoom(1);
+      if (dialog.open) dialog.close();
+      dialog.showModal();
+    };
+
+    document.querySelectorAll("[data-lightbox-open]").forEach((el) => {
+      el.addEventListener("click", () => {
+        const source = el.tagName === "IMG" ? el : el.querySelector("img");
+        if (source) openLightbox(source);
+      });
+    });
+
+    closeBtn.addEventListener("click", () => dialog.close());
+    zoomIn.addEventListener("click", () => applyZoom(zoom + 0.5));
+    zoomOut.addEventListener("click", () => applyZoom(zoom - 0.5));
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener("close", () => applyZoom(1));
+  }
+</script>

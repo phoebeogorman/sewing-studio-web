@@ -27,6 +27,9 @@ export interface Translations {
   nav_logo_alt: string;
   /** Accessible name of the in-page section nav. */
   nav_sections_label: string;
+  /** Accessible labels of the mobile menu toggle. */
+  nav_menu_open: string;
+  nav_menu_close: string;
 
   // Brand
   brand_name: string;
@@ -45,6 +48,15 @@ export interface Translations {
   carousel_previous: string;
   carousel_next: string;
   carousel_go_to: string;
+
+  // Lightbox
+  /** Accessible name of the fullscreen image viewer. */
+  lightbox_label: string;
+  /** Button label on openable images, e.g. "View {title} image". */
+  lightbox_open: string;
+  lightbox_close: string;
+  lightbox_zoom_in: string;
+  lightbox_zoom_out: string;
 }
 
 /**
@@ -70,6 +82,8 @@ export const translations: Record<Locale, Translations> = {
     nav_skip_to_content: "Skip to content",
     nav_logo_alt: "The Sewing Studio",
     nav_sections_label: "Sections",
+    nav_menu_open: "Open menu",
+    nav_menu_close: "Close menu",
 
     brand_name: "The Sewing Studio",
 
@@ -84,6 +98,12 @@ export const translations: Record<Locale, Translations> = {
     carousel_previous: "Previous {title} image",
     carousel_next: "Next {title} image",
     carousel_go_to: "Go to {title} image {n}",
+
+    lightbox_label: "Image viewer",
+    lightbox_open: "View {title} image",
+    lightbox_close: "Close",
+    lightbox_zoom_in: "Zoom in",
+    lightbox_zoom_out: "Zoom out",
   },
 
   es: {
@@ -94,6 +114,8 @@ export const translations: Record<Locale, Translations> = {
     nav_skip_to_content: "Saltar al contenido",
     nav_logo_alt: "The Sewing Studio",
     nav_sections_label: "Secciones",
+    nav_menu_open: "Abrir menú",
+    nav_menu_close: "Cerrar menú",
 
     brand_name: "The Sewing Studio",
 
@@ -108,6 +130,12 @@ export const translations: Record<Locale, Translations> = {
     carousel_previous: "Imagen anterior de {title}",
     carousel_next: "Imagen siguiente de {title}",
     carousel_go_to: "Ir a la imagen {n} de {title}",
+
+    lightbox_label: "Visor de imagen",
+    lightbox_open: "Ver imagen de {title}",
+    lightbox_close: "Cerrar",
+    lightbox_zoom_in: "Ampliar",
+    lightbox_zoom_out: "Reducir",
   },
 };
 

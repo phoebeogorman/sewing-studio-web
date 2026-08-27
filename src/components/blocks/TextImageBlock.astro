@@ -6,6 +6,8 @@
  * the background between the page colour and the cream surface.
  */
 import type { Block } from "../../content.config";
+import type { Locale } from "../../i18n/translations";
+import { t } from "../../i18n/translations";
 import { Image } from "astro:assets";
 import { resolveContentImage } from "../../assets/images/index";
 
@@ -13,9 +15,11 @@ type TextImageBlockData = Extract<Block, { type: "text-image" }>;
 
 interface Props {
   block: TextImageBlockData;
+  locale: Locale;
 }
 
-const { block } = Astro.props;
+const { block, locale } = Astro.props;
+const strings = t(locale);
 const headingId = `${block.id}-title`;
 const img = resolveContentImage(block.image.src);
 ---
@@ -31,7 +35,12 @@ const img = resolveContentImage(block.image.src);
       { "about-inner--reversed": block.mediaSide === "end" },
     ]}
   >
-    <div class="about-media">
+    <button
+      type="button"
+      class="about-media"
+      data-lightbox-open
+      aria-label={strings.lightbox_open.replace("{title}", block.title)}
+    >
       <Image
         src={img}
         alt={block.image.alt}
@@ -39,7 +48,7 @@ const img = resolveContentImage(block.image.src);
         sizes="(max-width: 900px) 100vw, 45vw"
         loading="lazy"
       />
-    </div>
+    </button>
 
     <div class="about-content">
       <p class="section-kicker">{block.kicker}</p>
@@ -62,12 +71,23 @@ const img = resolveContentImage(block.image.src);
     width: 100%;
   }
 
-  /* Document order is media then copy, so media sits on the start side by
-     default. This class pushes it to the end. TextMediaBlock is the inverse:
-     its document order is copy then media, so it applies --reversed when
-     mediaSide is start. Both map start/end to the same visual sides. */
+/* Document order is media then copy, so media sits on the start side by
+   default. This class pushes it to the end. TextMediaBlock is the inverse:
+   its document order is copy then media, so it applies --reversed when
+   mediaSide is start. Both map start/end to the same visual sides. */
   .about-inner--reversed .about-media {
     order: 2;
+  }
+
+  .about-media {
+    display: block;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    background: none;
+    cursor: zoom-in;
   }
 
   .about-media img {

@@ -30,5 +30,5 @@ const { block, locale, isFirst = false, numberedIndex } = Astro.props;
 {block.type === "text-media" && (
   <TextMediaBlock block={block} locale={locale} index={numberedIndex} />
 )}
-{block.type === "text-image" && <TextImageBlock block={block} />}
+{block.type === "text-image" && <TextImageBlock block={block} locale={locale} />}
 {block.type === "text" && <TextBlock block={block} />}

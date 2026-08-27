@@ -40,7 +40,24 @@ const altHref = `${localeHomePath(altLocale)}?lang=${altLocale}`;
       />
     </a>
 
-    <nav class="navbar-nav" aria-label={strings.nav_sections_label}>
+    {/* Mobile-only toggle. The nav below becomes a dropdown panel under the
+        header; the script in HomePage toggles data-open and the aria state. */}
+    <button
+      type="button"
+      class="navbar-toggle"
+      data-nav-toggle
+      data-open-label={strings.nav_menu_open}
+      data-close-label={strings.nav_menu_close}
+      aria-label={strings.nav_menu_open}
+      aria-expanded="false"
+      aria-controls="navbar-menu"
+    >
+      <span class="navbar-toggle-bar" aria-hidden="true"></span>
+      <span class="navbar-toggle-bar" aria-hidden="true"></span>
+      <span class="navbar-toggle-bar" aria-hidden="true"></span>
+    </button>
+
+    <nav id="navbar-menu" class="navbar-nav" data-nav-menu aria-label={strings.nav_sections_label}>
       {
         links.length > 0 && (
           <ul class="navbar-list">
@@ -92,6 +109,43 @@ const altHref = `${localeHomePath(altLocale)}?lang=${altLocale}`;
     object-fit: contain;
   }
 
+  /* Three-line toggle, hidden on desktop. The open state is driven by the
+     aria-expanded attribute the HomePage script keeps in sync. */
+  .navbar-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0 11px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .navbar-toggle-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    transition: transform var(--duration-fast) var(--ease-out),
+      opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .navbar-toggle[aria-expanded="true"] .navbar-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .navbar-toggle[aria-expanded="true"] .navbar-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-toggle[aria-expanded="true"] .navbar-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
   .navbar-nav {
     display: flex;
     align-items: center;
@@ -139,15 +193,57 @@ const altHref = `${localeHomePath(altLocale)}?lang=${altLocale}`;
     border-color: var(--text-primary);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 860px) {
+    .navbar-toggle {
+      display: flex;
+    }
+
+    /* The nav leaves the header row and becomes a dropdown panel. Hidden by
+       default, revealed while the HomePage script holds data-open. */
+    .navbar-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0 var(--container-pad) 1.25rem;
+      background: color-mix(in srgb, var(--background) 96%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 18px 32px -24px
+        color-mix(in srgb, var(--color-black) 45%, transparent);
+    }
+
+    .navbar-nav[data-open] {
+      display: flex;
+    }
+
     .navbar-list {
-      gap: 0.875rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .navbar-list li {
+      border-bottom: 1px solid var(--border);
     }
 
     .navbar-link {
-      font-size: 0.8125rem;
+      display: block;
+      padding-block: 1rem;
+      font-size: 1.0625rem;
     }
 
+    .navbar-lang {
+      align-self: flex-start;
+      margin-top: 1.25rem;
+    }
+  }
+
+  @media (max-width: 640px) {
     .navbar-logo {
       height: 30px;
     }

@@ -8,7 +8,9 @@
       "kicker": "Ribble Valley, Lancashire",
       "title": "The Sewing Studio",
       "tagline": "Considered craft. Refined making.",
-      "intro": "From precise alterations and bespoke garments to small, hands-on sewing workshops, the studio offers a personal approach to making. Each garment is considered individually, with careful attention given to fit, construction, fabric and finish.",
+      "intro": [
+        "From precise alterations and bespoke garments to small, hands-on sewing workshops, the studio offers a personal approach to making. Each garment is considered individually, with careful attention given to fit, construction, fabric and finish."
+      ],
       "image": {
         "src": "/images/bg-1.webp",
         "alt": ""
@@ -24,7 +26,12 @@
       "title": "Bespoke",
       "navLabel": "Bespoke",
       "lead": "A considered, made-to-measure service shaped around the individual.",
-      "body": "Each bespoke garment begins with a personal consultation to understand your requirements, preferences and the vision for the piece. From there, the garment is developed through precise pattern cutting, fabric selection and a series of fittings, allowing every detail to be refined.",
+      "body": [
+        "Each bespoke garment begins with a personal consultation to understand your requirements, preferences and the vision for the piece. From there, the garment is developed through precise pattern cutting, fabric selection and a series of fittings, allowing every detail to be refined.",
+        "From the initial concept through to final construction, each piece is carefully considered to create a garment that feels personal, beautifully finished and designed to be worn for years to come."
+      ],
+      "price": "Priced on application",
+      "priceCta": "Contact us",
       "gallery": [
         {
           "src": "/images/bespoke-1.webp",
@@ -45,8 +52,7 @@
       ],
       "mediaSide": "end",
       "surface": "page",
-      "numbered": true,
-      "price": "Priced on application"
+      "numbered": true
     },
     {
       "type": "text-media",
@@ -55,7 +61,11 @@
       "title": "Alterations",
       "navLabel": "Alterations",
       "lead": "From everyday tailoring to bridal and occasionwear, garments are carefully refined to achieve a more considered fit, balance and finish.",
-      "body": "Each alteration is approached individually, taking into consideration the original construction, fabric and proportions of the garment. Whether it is a simple adjustment or a more technical alteration, the aim is to preserve the character of the piece while creating a fit that feels effortless.",
+      "body": [
+        "Each alteration is approached individually, taking into consideration the original construction, fabric and proportions of the garment. Whether it is a simple adjustment or a more technical alteration, the aim is to preserve the character of the piece while creating a fit that feels effortless.",
+        "Bridal, formalwear and more complex alterations are also undertaken, with fittings arranged where required to ensure a precise result."
+      ],
+      "price": "From £20",
       "gallery": [
         {
           "src": "/images/alterations-1.webp",
@@ -80,8 +90,7 @@
       ],
       "mediaSide": "start",
       "surface": "cream",
-      "numbered": true,
-      "price": "From £20"
+      "numbered": true
     },
     {
       "type": "text-media",
@@ -90,7 +99,12 @@
       "title": "Workshops",
       "navLabel": "Workshops",
       "lead": "Small, focused sewing sessions held within the studio, designed to develop confidence, technique and a deeper understanding of garment making.",
-      "body": "Workshops are suitable for all levels and ages, from complete beginners learning the fundamentals to those looking to build on their existing sewing skills. Sessions combine practical learning with a considered approach to making, introducing techniques that can be carried forward into future projects.",
+      "body": [
+        "Workshops are suitable for all levels and ages, from complete beginners learning the fundamentals to those looking to build on their existing sewing skills. Sessions combine practical learning with a considered approach to making, introducing techniques that can be carried forward into future projects.",
+        "With small group sizes, each session offers individual guidance, whether you are working on a set studio project or developing a project of your own. The relaxed, hands-on environment allows you to learn at your own pace while receiving support throughout the process.",
+        "All sewing machinery and equipment is available to use within the studio, with fabrics and materials provided for beginner projects."
+      ],
+      "price": "£40 per session",
       "gallery": [
         {
           "src": "/images/workshops-1.webp",
@@ -127,20 +141,24 @@
       ],
       "mediaSide": "end",
       "surface": "page",
-      "numbered": true,
-      "price": "£40 per session"
+      "numbered": true
     },
     {
       "type": "text-image",
       "id": "studio",
       "kicker": "About",
       "title": "The Studio",
+      "navLabel": "The Studio",
+      "body": [
+        "The Sewing Studio was founded by fashion designer and maker Phoebe O'Gorman in 2024, from a desire to create a space centred around craftsmanship, creativity and considered making. Based in the Ribble Valley, Lancashire, the studio brings together Phoebe's background in fashion design and tailoring with her passion for creating, refining and sharing the skills behind well-made clothing.",
+        "Phoebe takes a personal and considered approach to every piece. Working from her private studio in Waddington, West Bradford, she creates a relaxed and welcoming environment where garments are carefully refined, ideas are brought to life, and sewing skills are shared.",
+        "Alongside the studio, Phoebe established her namesake label, Phoebe O'Gorman, creating limited pieces that reflect her approach to structure, form and longevity.",
+        "At the heart of the studio is a simple belief: that well-made clothing deserves to be valued, cared for and kept."
+      ],
       "image": {
         "src": "/images/bg-2.webp",
         "alt": ""
       },
-      "navLabel": "The Studio",
-      "body": "The Sewing Studio was founded by fashion designer and maker Phoebe O'Gorman in 2024, from a desire to create a space centred around craftsmanship, creativity and considered making. Based in the Ribble Valley, Lancashire, the studio brings together Phoebe's background in fashion design and tailoring with her passion for creating, refining and sharing the skills behind well-made clothing.",
       "mediaSide": "start",
       "surface": "cream"
     }
