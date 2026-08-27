@@ -7,7 +7,19 @@
     <title>Content Manager — The Sewing Studio</title>
   </head>
   <body>
-    <!-- Sveltia CMS: lightweight, Git-based CMS targeting Decap-compatible config.yml -->
-    <script src="https://unpkg.com/@sveltia/cms@latest/dist/sveltia-cms.js"></script>
+    <!-- Disable Sveltia CMS draft backups (IndexedDB). Merges into the existing
+         preferences so the stored auth token and theme are preserved, and makes
+         sure stale editor state can never overwrite content pushed from git. -->
+    <script>
+      try {
+        const KEY = "sveltia-cms.prefs";
+        const prefs = JSON.parse(localStorage.getItem(KEY) || "{}");
+        prefs.useDraftBackup = false;
+        localStorage.setItem(KEY, JSON.stringify(prefs));
+      } catch {}
+    </script>
+    <!-- Sveltia CMS: lightweight, Git-based CMS targeting Decap-compatible config.yml.
+         Version pinned so CMS behaviour cannot change between releases. -->
+    <script src="https://unpkg.com/@sveltia/cms@0.201.1/dist/sveltia-cms.js"></script>
   </body>
 </html>

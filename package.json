@@ -12,7 +12,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "cms": "decap-server",
-    "astro": "astro"
+    "astro": "astro",
+    "check:content": "node scripts/check-content.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.2.1",

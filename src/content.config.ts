@@ -32,12 +32,22 @@ const imageRef = z.object({
 });
 
 /**
- * Body copy as one or more paragraphs. A plain string stays a single
- * paragraph, so short blocks are not forced into array syntax.
+ * Body copy as one or more paragraphs.
+ *
+ * The CMS stores body copy as a single string with paragraphs separated by
+ * blank lines (`text` widget), so the transform splits on those. Plain arrays
+ * are still accepted for backward compatibility with older content files.
  */
 const body = z
   .union([z.string(), z.array(z.string()).min(1)])
-  .transform((val) => (Array.isArray(val) ? val : [val]));
+  .transform((val) =>
+    Array.isArray(val)
+      ? val
+      : val
+          .split(/\n\s*\n/)
+          .map((paragraph) => paragraph.trim())
+          .filter((paragraph) => paragraph.length > 0),
+  );
 
 /**
  * Price line shown after the copy, e.g. "From £20". Free text rather than a

@@ -8,9 +8,7 @@
       "kicker": "Ribble Valley, Lancashire",
       "title": "The Sewing Studio",
       "tagline": "Oficio meditado. Confección refinada.",
-      "intro": [
-        "Desde arreglos precisos y prendas a medida hasta talleres de costura reducidos y prácticos, el estudio propone una forma personal de confeccionar. Cada prenda se estudia de manera individual, con especial atención al ajuste, la construcción, el tejido y los acabados."
-      ],
+      "intro": "Desde arreglos precisos y prendas a medida hasta talleres de costura reducidos y prácticos, el estudio propone una forma personal de confeccionar. Cada prenda se estudia de manera individual, con especial atención al ajuste, la construcción, el tejido y los acabados.",
       "image": {
         "src": "/images/bg-1.webp",
         "alt": ""
@@ -26,10 +24,7 @@
       "title": "A medida",
       "navLabel": "A medida",
       "lead": "Un servicio de confección a medida, meditado y construido en torno a cada persona.",
-      "body": [
-        "Cada prenda a medida comienza con una consulta personal para entender tus necesidades, tus preferencias y la idea que tienes de la pieza. A partir de ahí, la prenda se desarrolla mediante un patronaje preciso, la elección del tejido y una serie de pruebas que permiten afinar cada detalle.",
-        "Desde el concepto inicial hasta la construcción final, cada pieza se estudia con cuidado para crear una prenda personal, bellamente acabada y pensada para llevarse durante años."
-      ],
+      "body": "Cada prenda a medida comienza con una consulta personal para entender tus necesidades, tus preferencias y la idea que tienes de la pieza. A partir de ahí, la prenda se desarrolla mediante un patronaje preciso, la elección del tejido y una serie de pruebas que permiten afinar cada detalle.\n\nDesde el concepto inicial hasta la construcción final, cada pieza se estudia con cuidado para crear una prenda personal, bellamente acabada y pensada para llevarse durante años.",
       "price": "Precio bajo consulta",
       "priceCta": "Contacta",
       "gallery": [
@@ -61,10 +56,7 @@
       "title": "Arreglos",
       "navLabel": "Arreglos",
       "lead": "Desde sastrería del día a día hasta vestidos de novia y de ceremonia, cada prenda se refina con cuidado para lograr un ajuste, un equilibrio y un acabado más meditados.",
-      "body": [
-        "Cada arreglo se aborda de forma individual, teniendo en cuenta la construcción original, el tejido y las proporciones de la prenda. Ya sea un ajuste sencillo o una intervención más técnica, el objetivo es preservar el carácter de la pieza y conseguir un ajuste que resulte natural.",
-        "También se realizan arreglos de novia, de ceremonia y de mayor complejidad, con las pruebas necesarias para asegurar un resultado preciso."
-      ],
+      "body": "Cada arreglo se aborda de forma individual, teniendo en cuenta la construcción original, el tejido y las proporciones de la prenda. Ya sea un ajuste sencillo o una intervención más técnica, el objetivo es preservar el carácter de la pieza y conseguir un ajuste que resulte natural.\n\nTambién se realizan arreglos de novia, de ceremonia y de mayor complejidad, con las pruebas necesarias para asegurar un resultado preciso.",
       "price": "Desde 20 £",
       "gallery": [
         {
@@ -99,11 +91,7 @@
       "title": "Talleres",
       "navLabel": "Talleres",
       "lead": "Sesiones de costura reducidas y enfocadas, celebradas en el estudio, pensadas para ganar confianza, técnica y una comprensión más profunda de la confección.",
-      "body": [
-        "Los talleres son aptos para todos los niveles y edades, desde quien empieza de cero y aprende los fundamentos hasta quien quiere ampliar la costura que ya domina. Las sesiones combinan la práctica con una forma meditada de confeccionar, e introducen técnicas que pueden aplicarse a proyectos futuros.",
-        "Con grupos reducidos, cada sesión ofrece acompañamiento individual, tanto si trabajas en un proyecto propuesto por el estudio como si desarrollas uno propio. El ambiente relajado y práctico te permite aprender a tu ritmo con apoyo durante todo el proceso.",
-        "Toda la maquinaria y el equipo de costura están disponibles en el estudio, y los tejidos y materiales se facilitan para los proyectos de iniciación."
-      ],
+      "body": "Los talleres son aptos para todos los niveles y edades, desde quien empieza de cero y aprende los fundamentos hasta quien quiere ampliar la costura que ya domina. Las sesiones combinan la práctica con una forma meditada de confeccionar, e introducen técnicas que pueden aplicarse a proyectos futuros.\n\nCon grupos reducidos, cada sesión ofrece acompañamiento individual, tanto si trabajas en un proyecto propuesto por el estudio como si desarrollas uno propio. El ambiente relajado y práctico te permite aprender a tu ritmo con apoyo durante todo el proceso.\n\nToda la maquinaria y el equipo de costura están disponibles en el estudio, y los tejidos y materiales se facilitan para los proyectos de iniciación.",
       "price": "40 £ por sesión",
       "gallery": [
         {
@@ -149,12 +137,7 @@
       "kicker": "Sobre nosotras",
       "title": "El estudio",
       "navLabel": "El estudio",
-      "body": [
-        "The Sewing Studio nació en 2024 de la mano de la diseñadora y modista Phoebe O'Gorman, con el deseo de crear un espacio centrado en el oficio, la creatividad y una forma meditada de confeccionar. Ubicado en Ribble Valley, Lancashire, el estudio reúne la formación de Phoebe en diseño de moda y sastrería con su pasión por crear, perfeccionar y compartir el oficio que hay detrás de la ropa bien hecha.",
-        "Phoebe aborda cada pieza de forma personal y meditada. Desde su estudio privado en Waddington, West Bradford, crea un ambiente relajado y acogedor donde las prendas se refinan con cuidado, las ideas toman forma y la costura se comparte.",
-        "Junto al estudio, Phoebe fundó su propia firma, Phoebe O'Gorman, con la que crea piezas limitadas que reflejan su manera de entender la estructura, la forma y la durabilidad.",
-        "En el centro del estudio hay una idea sencilla: la ropa bien hecha merece valorarse, cuidarse y conservarse."
-      ],
+      "body": "The Sewing Studio nació en 2024 de la mano de la diseñadora y modista Phoebe O'Gorman, con el deseo de crear un espacio centrado en el oficio, la creatividad y una forma meditada de confeccionar. Ubicado en Ribble Valley, Lancashire, el estudio reúne la formación de Phoebe en diseño de moda y sastrería con su pasión por crear, perfeccionar y compartir el oficio que hay detrás de la ropa bien hecha.\n\nPhoebe aborda cada pieza de forma personal y meditada. Desde su estudio privado en Waddington, West Bradford, crea un ambiente relajado y acogedor donde las prendas se refinan con cuidado, las ideas toman forma y la costura se comparte.\n\nJunto al estudio, Phoebe fundó su propia firma, Phoebe O'Gorman, con la que crea piezas limitadas que reflejan su manera de entender la estructura, la forma y la durabilidad.\n\nEn el centro del estudio hay una idea sencilla: la ropa bien hecha merece valorarse, cuidarse y conservarse.",
       "image": {
         "src": "/images/bg-2.webp",
         "alt": ""

@@ -106,8 +106,16 @@ collections:
                     widget: string
                     required: false
                   - name: body
-                    label: Body Copy
+                    label: Body Copy (blank line = new paragraph)
                     widget: text
+                  - name: price
+                    label: Price (e.g. "From £20")
+                    widget: string
+                    required: false
+                  - name: priceCta
+                    label: Price Link Label (e.g. "Contact us")
+                    widget: string
+                    required: false
                   - name: gallery
                     label: Gallery Images
                     widget: list
@@ -326,8 +334,16 @@ collections:
                     widget: string
                     required: false
                   - name: body
-                    label: Body Copy
+                    label: Body Copy (blank line = new paragraph)
                     widget: text
+                  - name: price
+                    label: Price (e.g. "From £20")
+                    widget: string
+                    required: false
+                  - name: priceCta
+                    label: Price Link Label (e.g. "Contact us")
+                    widget: string
+                    required: false
                   - name: gallery
                     label: Gallery Images
                     widget: list
