@@ -88,7 +88,7 @@ export const translations: Record<Locale, Translations> = {
 
     brand_name: "The Sewing Studio",
 
-    footer_tagline: "Alterations, workshops and bespoke making.",
+    footer_tagline: "Bespoke Garments, Alterations, Workshops.",
     footer_contact_heading: "Contact",
     footer_follow_heading: "Follow",
     footer_rights: "All rights reserved.",
@@ -120,7 +120,7 @@ export const translations: Record<Locale, Translations> = {
 
     brand_name: "The Sewing Studio",
 
-    footer_tagline: "Arreglos, talleres y confección a medida.",
+    footer_tagline: "Confección a medida, arreglos y talleres.",
     footer_contact_heading: "Contacto",
     footer_follow_heading: "Síguenos",
     footer_rights: "Todos los derechos reservados.",

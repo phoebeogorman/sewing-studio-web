@@ -20,7 +20,16 @@ const year = new Date().getFullYear();
 <footer id="contact" class="footer" aria-labelledby="footer-title">
   <div class="ss-container footer-inner">
     <div class="footer-brand">
-      <h2 id="footer-title" class="section-title footer-title">{strings.brand_name}</h2>
+      <h2 id="footer-title" class="footer-title">
+        <img
+          src="/images/wordmark-the-sewing-studio.webp"
+          srcset="/images/wordmark-the-sewing-studio.webp 1x, /images/wordmark-the-sewing-studio@2x.webp 2x"
+          alt={strings.nav_logo_alt}
+          width="170"
+          height="48"
+          class="footer-logo"
+        />
+      </h2>
       <p class="footer-tagline">{strings.footer_tagline}</p>
     </div>
 
@@ -73,7 +82,13 @@ const year = new Date().getFullYear();
   }
 
   .footer-title {
-    max-width: 12ch;
+    margin: 0;
+  }
+
+  .footer-logo {
+    width: auto;
+    height: clamp(2rem, 4vw, 3rem);
+    object-fit: contain;
   }
 
   .footer-tagline {
