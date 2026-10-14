@@ -56,8 +56,9 @@
       "title": "Arreglos",
       "navLabel": "Arreglos",
       "lead": "Desde sastrería del día a día hasta vestidos de novia y de ceremonia, cada prenda se refina con cuidado para lograr un ajuste, un equilibrio y un acabado más meditados.",
-      "body": "Cada arreglo se aborda de forma individual, teniendo en cuenta la construcción original, el tejido y las proporciones de la prenda. Ya sea un ajuste sencillo o una intervención más técnica, el objetivo es preservar el carácter de la pieza y conseguir un ajuste que resulte natural.\n\nTambién se realizan arreglos de novia, de ceremonia y de mayor complejidad, con las pruebas necesarias para asegurar un resultado preciso.",
-      "price": "Desde 20 £",
+      "body": "Desde vaqueros y pantalones de uso diario hasta vestidos de novia y de ceremonia, las prendas se arreglan con cuidado para conseguir un mejor ajuste y un mejor acabado.\nCada arreglo se aborda de forma individual, teniendo en cuenta la construcción original, el tejido y las proporciones de la prenda. Ya sea un ajuste sencillo o una intervención más técnica, el objetivo es preservar el carácter de la pieza y conseguir un ajuste que resulte natural.\n\nTambién se realizan arreglos de novia, de ceremonia y de mayor complejidad, con las pruebas necesarias para asegurar un resultado preciso.",
+      "price": "Desde 15 £",
+      "priceCta": "",
       "gallery": [
         {
           "src": "/images/IMG_3465.JPG",
@@ -91,8 +92,9 @@
       "title": "Talleres",
       "navLabel": "Talleres",
       "lead": "Sesiones de costura reducidas y enfocadas, celebradas en el estudio, pensadas para ganar confianza, técnica y una comprensión más profunda de la confección.",
-      "body": "Los talleres son aptos para todos los niveles y edades, desde quien empieza de cero y aprende los fundamentos hasta quien quiere ampliar la costura que ya domina. Las sesiones combinan la práctica con una forma meditada de confeccionar, e introducen técnicas que pueden aplicarse a proyectos futuros.\n\nCon grupos reducidos, cada sesión ofrece acompañamiento individual, tanto si trabajas en un proyecto propuesto por el estudio como si desarrollas uno propio. El ambiente relajado y práctico te permite aprender a tu ritmo con apoyo durante todo el proceso.\n\nToda la maquinaria y el equipo de costura están disponibles en el estudio, y los tejidos y materiales se facilitan para los proyectos de iniciación.",
-      "price": "40 £ por sesión",
+      "body": "Los talleres son aptos para todos los niveles y edades, desde quien empieza de cero y aprende los fundamentos hasta quien quiere ampliar la costura que ya domina. Las sesiones combinan la práctica con una forma meditada de confeccionar, e introducen técnicas que pueden aplicarse a proyectos futuros.\n\nCon grupos reducidos, cada taller de tres horas ofrece acompañamiento individual, tanto si trabajas en un proyecto propuesto por el estudio como si desarrollas uno propio. El ambiente relajado y práctico te permite aprender a tu ritmo con apoyo durante todo el proceso.\n\nToda la maquinaria y el equipo de costura están disponibles en el estudio, y los tejidos y materiales se facilitan para los proyectos de iniciación.",
+      "price": "40 £ por taller de 3 horas",
+      "priceCta": "",
       "gallery": [
         {
           "src": "/images/workshops-1.webp",
@@ -103,7 +105,7 @@
           "alt": ""
         },
         {
-          "src": "/images/workshops-3.webp",
+          "src": "/images/IMG_2172.webp",
           "alt": ""
         },
         {
