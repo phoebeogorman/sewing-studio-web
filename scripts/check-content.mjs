@@ -84,6 +84,13 @@ for (const id of Object.keys(enMap)) {
   }
 }
 
+for (const block of files.en.blocks) {
+  const other = files.es.blocks.find((candidate) => candidate.id === block.id);
+  if (other && Boolean(block.voucher) !== Boolean(other.voucher)) {
+    errors.push(`blocks.${block.id}: voucher presence differs between locales`);
+  }
+}
+
 const enIds = files.en.blocks.map((b) => b.id).join(",");
 const esIds = files.es.blocks.map((b) => b.id).join(",");
 

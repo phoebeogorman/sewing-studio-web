@@ -116,6 +116,25 @@ collections:
                     label: Price Link Label (e.g. "Contact us")
                     widget: string
                     required: false
+                  - name: voucher
+                    label: Gift Voucher
+                    widget: object
+                    required: false
+                    fields:
+                      - name: title
+                        label: Title
+                        widget: string
+                      - name: text
+                        label: Description
+                        widget: text
+                      - name: ctaLabel
+                        label: Purchase Button Label
+                        widget: string
+                      - name: url
+                        label: Payment Link (HTTPS only; leave empty until ready)
+                        widget: string
+                        required: false
+                        default: ""
                   - name: gallery
                     label: Gallery Images
                     widget: list
@@ -344,6 +363,25 @@ collections:
                     label: Price Link Label (e.g. "Contact us")
                     widget: string
                     required: false
+                  - name: voucher
+                    label: Gift Voucher
+                    widget: object
+                    required: false
+                    fields:
+                      - name: title
+                        label: Title
+                        widget: string
+                      - name: text
+                        label: Description
+                        widget: text
+                      - name: ctaLabel
+                        label: Purchase Button Label
+                        widget: string
+                      - name: url
+                        label: Payment Link (HTTPS only; leave empty until ready)
+                        widget: string
+                        required: false
+                        default: ""
                   - name: gallery
                     label: Gallery Images
                     widget: list

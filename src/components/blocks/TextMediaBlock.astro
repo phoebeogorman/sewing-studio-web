@@ -33,6 +33,21 @@ const indexLabel = index === undefined ? undefined : String(index).padStart(2, "
 const labelPrev = strings.carousel_previous.replace("{title}", block.title);
 const labelNext = strings.carousel_next.replace("{title}", block.title);
 
+// Render guard on top of the schema: only an https:// URL ever becomes a link.
+// Anything else (empty, malformed, another scheme) falls back to the disabled
+// "coming soon" placeholder instead of a dead or unsafe anchor.
+const voucher = block.voucher;
+let voucherUrl = "";
+if (voucher?.url) {
+  try {
+    const parsed = new URL(voucher.url);
+    if (parsed.protocol === "https:") voucherUrl = parsed.href;
+  } catch {
+    voucherUrl = "";
+  }
+}
+const voucherHeadingId = `${block.id}-voucher-title`;
+
 const slides = block.gallery.map((image) => ({
   meta: resolveContentImage(image.src),
   alt: image.alt,
@@ -47,7 +62,10 @@ const slides = block.gallery.map((image) => ({
   <div
     class:list={[
       "ss-container service-inner",
-      { "service-inner--reversed": block.mediaSide === "start" },
+      {
+        "service-inner--reversed": block.mediaSide === "start",
+        "service-inner--fill": Boolean(voucher),
+      },
     ]}
   >
     <div class="service-content">
@@ -72,6 +90,30 @@ const slides = block.gallery.map((image) => ({
         </a>
       )}
     </div>
+
+    {voucher && (
+      <aside class="voucher" aria-labelledby={voucherHeadingId}>
+        <h3 id={voucherHeadingId} class="voucher-title">{voucher.title}</h3>
+        <div class="voucher-body">
+          <p class="voucher-text">{voucher.text}</p>
+          {voucherUrl ? (
+            <a
+              class="service-price-cta voucher-link"
+              href={voucherUrl}
+              rel="noopener noreferrer"
+            >
+              <span>{voucher.ctaLabel}</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+            </a>
+          ) : (
+            <p class="voucher-unavailable">
+              <span class="voucher-unavailable-label">{voucher.ctaLabel}</span>
+              <span class="voucher-status">{strings.voucher_coming_soon}</span>
+            </p>
+          )}
+        </div>
+      </aside>
+    )}
 
     <div class="service-media carousel" data-carousel>
       <div
@@ -213,6 +255,72 @@ const slides = block.gallery.map((image) => ({
     border-bottom-color: var(--accent);
   }
 
+  /* Gift voucher offer. It sits as a band below the two-column row, so the
+     text column stays as short as the media beside it. It is set as a
+     typographic sub-section rather than a box: a hairline rule (the same one
+     that opens the price), a small display heading, grey body copy and the
+     same quiet arrow link used for the price call to action. On desktop the
+     heading and the copy line up with the two columns above (subgrid); the
+     explicit order keeps the band last even when the media side is mirrored. */
+  .voucher {
+    grid-column: 1 / -1;
+    order: 3;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: start;
+    gap: 0.75rem clamp(2rem, 5vw, 4.5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .voucher-title {
+    font-size: clamp(1.375rem, 2.2vw, 1.625rem);
+    line-height: 1.1em;
+    color: var(--text-primary);
+  }
+
+  .voucher-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .voucher-text {
+    font-size: 1rem;
+    line-height: 1.35em;
+    color: var(--text-secondary);
+    max-width: 46ch;
+  }
+
+  .voucher-link {
+    margin-top: 0.5rem;
+    max-width: 100%;
+  }
+
+  /* No payment link yet: plain text, not a link or a button, so nothing about
+     it invites a click. The status tag carries the message. */
+  .voucher-unavailable {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    margin-top: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: default;
+  }
+
+  .voucher-status {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
   /* Sits inside the kicker and inherits its casing and tracking; the accent
      colour and the gap are all it needs to read as a counter. */
   .service-index {
@@ -253,6 +361,33 @@ const slides = block.gallery.map((image) => ({
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* Blocks that carry a voucher have a taller text column than the others.
+     There the media column stretches to the row, and the slide height above
+     becomes a minimum: the photograph grows to the height of the copy (cropped
+     by object-fit, never distorted) instead of leaving a gap under it. The
+     image is taken out of flow so its intrinsic height never props the row
+     open. Blocks without a voucher keep the fixed slide height. */
+  .service-inner--fill .carousel {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-inner--fill .carousel-track {
+    flex: 1;
+  }
+
+  .service-inner--fill .carousel-slide {
+    position: relative;
+    height: auto;
+    min-height: clamp(380px, 62vh, 620px);
+  }
+
+  .service-inner--fill .carousel-slide img {
+    position: absolute;
+    inset: 0;
   }
 
   .carousel-ui {
@@ -344,8 +479,25 @@ const slides = block.gallery.map((image) => ({
       order: 0;
     }
 
+    /* One column: the voucher keeps following the text, ahead of the media,
+       exactly where it sat when it lived inside the text column. */
+    .voucher {
+      order: 1;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .service-media {
+      order: 2;
+    }
+
     .carousel-slide {
       height: clamp(300px, 48vh, 460px);
+    }
+
+    .service-inner--fill .carousel-slide {
+      height: auto;
+      min-height: clamp(300px, 48vh, 460px);
     }
   }
 </style>

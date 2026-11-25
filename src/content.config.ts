@@ -61,6 +61,22 @@ const price = z.string().optional();
  */
 const priceCta = z.string().optional();
 
+/**
+ * Gift voucher card shown under the price. `url` is a Stripe Payment Link:
+ * empty while the link does not exist yet (the card then renders a
+ * "coming soon" placeholder instead of a link), otherwise https:// only.
+ */
+const voucher = z
+  .object({
+    title: z.string(),
+    text: z.string(),
+    ctaLabel: z.string(),
+    url: z
+      .union([z.literal(""), z.string().url().startsWith("https://")])
+      .default(""),
+  })
+  .optional();
+
 /** Anchor-safe identifier: lowercase, starts with a letter, hyphens allowed. */
 const blockId = z.string().transform((val) => {
   const clean = val.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/^-+|-+$/g, "");
@@ -107,6 +123,7 @@ const textMediaBlock = z.object({
   body,
   price,
   priceCta,
+  voucher,
   gallery: z.array(imageRef).min(1),
   mediaSide,
   surface,

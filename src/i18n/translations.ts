@@ -58,6 +58,9 @@ export interface Translations {
   /** Photo navigation labels for galleries, shown as arrows. */
   lightbox_previous: string;
   lightbox_next: string;
+
+  /** Disabled stand-in for the voucher button while it has no payment link. */
+  voucher_coming_soon: string;
 }
 
 /**
@@ -105,6 +108,8 @@ export const translations: Record<Locale, Translations> = {
     lightbox_close: "Close",
     lightbox_previous: "Previous image",
     lightbox_next: "Next image",
+
+    voucher_coming_soon: "Coming soon",
   },
 
   es: {
@@ -137,6 +142,8 @@ export const translations: Record<Locale, Translations> = {
     lightbox_close: "Cerrar",
     lightbox_previous: "Imagen anterior",
     lightbox_next: "Imagen siguiente",
+
+    voucher_coming_soon: "Próximamente",
   },
 };
 
